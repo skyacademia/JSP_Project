@@ -1,7 +1,7 @@
 CREATE SCHEMA `jspsql` ;
 
 CREATE TABLE `jspsql`.`membertbl` (
-  `mID` INT NOT NULL,
+  `mID` VARCHAR(45) NOT NULL,
   `mPW` VARCHAR(45) NOT NULL,
   `mName` VARCHAR(45) NOT NULL,
   `mTel` VARCHAR(45) NOT NULL,
@@ -16,6 +16,6 @@ CREATE TABLE `jspsql`.`posttbl` (
   `pTitle` VARCHAR(45) NOT NULL,
   `pWriter` VARCHAR(45) NOT NULL,
   `pPrice` VARCHAR(45) NOT NULL,
-  `pText` VARCHAR(45) NOT NULL,
+  `pText` TEXT(10000) NOT NULL,
   `pSikll` VARCHAR(45) NULL,
   PRIMARY KEY (`pID`));

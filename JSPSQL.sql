@@ -19,7 +19,7 @@ CREATE TABLE `jspsql`.`posttbl` (
   `pText` TEXT(10000) NOT NULL,
   `pSikll` VARCHAR(45) NULL,	
   PRIMARY KEY (`pID`),
-  FOREIGN KEY (pWriter) REFERENCES membertbl(mID) ON UPDATE CASCADE
+  FOREIGN KEY (pWriter) REFERENCES membertbl(mID) ON UPDATE CASCADE ON delete cascade
   );
   
   

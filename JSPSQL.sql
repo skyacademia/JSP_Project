@@ -7,8 +7,8 @@ CREATE TABLE `jspsql`.`membertbl` (
   `mTel` VARCHAR(45) NOT NULL,
   `mMail` VARCHAR(45) NULL,
   `mAddress` VARCHAR(45) NULL,
-  `mText` VARCHAR(45) NULL,
-  `mSkill` VARCHAR(45) NULL,
+  `mText` VARCHAR(100) NULL,
+  `mSkill` VARCHAR(100) NULL,
   PRIMARY KEY (`mID`));
 
 CREATE TABLE `jspsql`.`posttbl` (
@@ -17,5 +17,10 @@ CREATE TABLE `jspsql`.`posttbl` (
   `pWriter` VARCHAR(45) NOT NULL,
   `pPrice` VARCHAR(45) NOT NULL,
   `pText` TEXT(10000) NOT NULL,
-  `pSikll` VARCHAR(45) NULL,
-  PRIMARY KEY (`pID`));
+  `pSikll` VARCHAR(45) NULL,	
+  PRIMARY KEY (`pID`),
+  FOREIGN KEY (pWriter) REFERENCES membertbl(mID) ON UPDATE CASCADE
+  );
+  
+  
+  

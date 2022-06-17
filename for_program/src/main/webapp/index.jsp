@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bootstrap demo</title>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
@@ -24,6 +25,7 @@
 </head>
 
 <body>
+
   <!--메뉴-->
   <div class="container">
     <nav class="navbar navbar-expand-md fixed-top bg-white">
@@ -45,11 +47,11 @@
               <a class="nav-link disabled">서비스 등록</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <a href="./login.html"><button class="btn btn-outline-primary me-3">로그인</button></a>
-			<a href="./signup.jsp"><button class="btn btn-outline-success">회원가입</button></a>
-          </form>
-        </div>
+          
+            <button class="btn btn-outline-primary me-3" onclick="location='Login.jsp'">로그인</button>
+			<button class="btn btn-outline-success">회원가입</button></a>
+          
+        </div>                         
       </div>
     </nav>
 
@@ -58,11 +60,11 @@
       <img src="./resources/images/mainImg.jpg" class="img-fluid w-100" alt="...">
       <div class="carousel-caption text-start" style="right: 15%;
       left: 15%;">
-        <h1 class="display-4">여러분이 원하는 프로젝트를 찾아보세요</h1>
+      </div>
+      <h1 class="display-4">여러분이 원하는 프로젝트를 찾아보세요</h1>
         <div class="mb-3">
           <input type="text" class="form-control bg-danger " id="..." style="--bs-bg-opacity: .0;">
         </div>
-      </div>
     </div>
 
     <hr class="featurette-divider">

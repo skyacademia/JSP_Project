@@ -8,6 +8,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
+<%
+	String id;
+	try{	
+		id = (String)pageContext.getSession().getAttribute("id");
+	}catch(Exception e){
+		id = null;
+	}
+%>
 	<!-- header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
         <a class="navbar-brand fs-2" href="#">ForProgram</a>
@@ -25,8 +34,14 @@
                     <a class="nav-link fs-5" href="#">프로젝트 등록</a>
                 </li>
             </ul>
-                <button class="btn btn-primary mx-1 px-5 fs-5">로그인</button>
-                <button class="btn btn-outline-primary mx-1 px-5 fs-5">회원가입</button>
+            <% if(id == null){ %>
+                <button class="btn btn-primary mx-1 px-5 fs-5" onclick="location='Login.jsp'">로그인</button>
+                <button class="btn btn-outline-primary mx-1 px-5 fs-5" onclick="location='Register.jsp'" >회원가입</button>
+                <% }else { %>
+            	<button class="btn btn-primary mx-1 px-5 fs-5" onclick="location='Login.jsp'">마이페이지</button>
+                <button class="btn btn-outline-primary mx-1 px-5 fs-5" onclick="location='Register.jsp'" >프로필 수정</button>
+                
+            <% } %>
         </div>
     </nav>
     <!-- header end -->

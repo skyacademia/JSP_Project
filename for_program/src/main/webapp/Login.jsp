@@ -21,14 +21,13 @@
 <body>
 	
 	<jsp:include page="header.jsp" />
-	<jsp:include page="category.jsp" />
 	
 	<form method="post" action="<%= request.getContextPath()%>/LoginAction.jsp">
 	    <h3 class="mb-3" style="text-align: center;">로그인 화면</h3>
 		<label for="name">아이디</label>
-		<input type="text" class="form-control" id="mID" placeholder="아이디" maxlength = "20" required>
+		<input type="text" class="form-control" id="mID" placeholder="아이디" maxlength = "20" name ="mID" required>
 		<label for="name">비밀번호</label>
-		<input type="password" class="form-control" id="mPW" placeholder="비밀번호" maxlength = "20" required>
+		<input type="password" class="form-control" id="mPW" placeholder="비밀번호" maxlength = "20" name="mPW" required>
 	    <input type="submit" class="btn btn-primary btn-lg btn-block" value="로그인">
 	</form>
 </body>

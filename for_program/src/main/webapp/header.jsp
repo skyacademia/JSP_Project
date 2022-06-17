@@ -30,9 +30,21 @@
                 <li class="nav-item">
                     <a class="nav-link fs-5" href="#">프로젝트 입력</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="#">프로젝트 등록</a>
+              <% if(id == null){ %>
+               	<li class="nav-item">
+                    <a class="nav-link fs-5" href="header.jsp">프로젝트 등록</a>
                 </li>
+                <li class="nav-item">
+                	<span class="nav-link fs-5">로그인을 해주세요!!!!@!@!@</span>
+                </li>
+            	<% }else { %>
+                <li class="nav-item">
+                    <a class="nav-link fs-5" href="addposter.jsp">프로젝트 등록</a>
+                </li>
+                <li class="nav-item">
+                	<span class="nav-link fs-5">로그인됨 : <%=id %></span>
+                </li>
+               <% } %>
             </ul>
             <% if(id == null){ %>
                 <button class="btn btn-primary mx-1 px-5 fs-5" onclick="location='Login.jsp'">로그인</button>

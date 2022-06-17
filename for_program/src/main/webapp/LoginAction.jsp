@@ -30,7 +30,7 @@
             PrintWriter script = response.getWriter();
             script.println("<script>");
             script.println("alert('로그인 성공')");
-            script.println("location.href = 'Register.jsp'"); // 로그인 되면 이동할페이지
+            script.println("location.href = 'index.jsp'"); // 로그인 되면 이동할페이지
             script.println("</script>");
         } else if (result == 0) { // 비밀번호 불일치시
             PrintWriter script = response.getWriter();

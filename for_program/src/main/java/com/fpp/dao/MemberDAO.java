@@ -10,13 +10,13 @@ import java.sql.Statement;
 import com.fpp.dto.*;;
 
 public class MemberDAO {
-    private Connection c;
+    public Connection c;
     MemberDTO member = new MemberDTO();
 
     public MemberDAO() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspsql?serverTimezone=UTC", "root", "root");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspsql?serverTimezone=UTC", "root", "1234");
         } catch (Exception e) {
             e.printStackTrace();
         }

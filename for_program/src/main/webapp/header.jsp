@@ -25,8 +25,8 @@
                     <a class="nav-link fs-5" href="#">프로젝트 등록</a>
                 </li>
             </ul>
-                <button class="btn btn-primary mx-1 px-5 fs-5">로그인</button>
-                <button class="btn btn-outline-primary mx-1 px-5 fs-5">회원가입</button>
+                <button class="btn btn-primary mx-1 px-5 fs-5" onclick="location='Login.jsp'">로그인</button>
+                <button class="btn btn-outline-primary mx-1 px-5 fs-5" onclick="location='Register.jsp'" >회원가입</button>
         </div>
     </nav>
     <!-- header end -->

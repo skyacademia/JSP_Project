@@ -30,12 +30,15 @@
                 <li class="nav-item">
                     <a class="nav-link fs-5" href="#">프로젝트 입력</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-3" href="posters.jsp">(임시)프로젝트 목록</a>
+                </li>
               <% if(id == null){ %>
                	<li class="nav-item">
                     <a class="nav-link fs-5" href="header.jsp">프로젝트 등록</a>
                 </li>
                 <li class="nav-item">
-                	<span class="nav-link fs-5">로그인을 해주세요!!!!@!@!@</span>
+                	<span class="nav-link fs-3">로그인을 해주세요!!!!@!@!@</span>
                 </li>
             	<% }else { %>
                 <li class="nav-item">

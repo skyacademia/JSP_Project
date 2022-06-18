@@ -24,9 +24,6 @@ request.setCharacterEncoding("UTF-8");
 </style>
 </head>
 <body>
-	<!-- 임시로 pID = 1인 페이지를 불러온 상태 -->
-
-
 
 	<!-- 헤더와 카테고리 추가-->
 	<jsp:include page="header.jsp" />
@@ -34,29 +31,45 @@ request.setCharacterEncoding("UTF-8");
 
 
 
-
 	<%@ include file="dbconn.jsp"%>
 	<%
+	
 	float score = 0;
 	float cnt = 0;
 	
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
+	
+	
+	
+	//--------------------------------------------------------
+	String num_ = request.getParameter("num");
+	int num = 1;
+	if(num_ !=null && !num_.equals("")) 
+		num = Integer.parseInt(num_);
+	
+	
+	
+	
 	//--------------------------------------------------------------------------------------------------------
-	String sql3 = "SELECT sum(rScore) as sum , count(rScore) as cnt FROM reviewtbl where rPosterID=1;";
+	String sql3 = "SELECT sum(rScore) as sum , count(rScore) as cnt FROM reviewtbl where rPosterID = ? ";
 	pstmt = conn.prepareStatement(sql3);
+	pstmt.setInt(1,num);
 	rs = pstmt.executeQuery();
 	while (rs.next()) {
 		cnt = rs.getFloat("cnt");
+		if(cnt != 0){
 		score = rs.getFloat("sum") / cnt;
+		}
+	
 
 	}
-
 	String score_ = String.format("%.2f", score);
 	//--------------------------------------------------------------------------------------------------------
 	String sql = "SELECT * FROM posttbl as P " + "inner join membertbl as M " + "on P.pWriter = M.mID "
-			+ "inner join skilltbl as S on S.sMemberID = M.mID where pid=1;";
+			+ "inner join skilltbl as S on S.sMemberID = M.mID where pid=?;";
 	pstmt = conn.prepareStatement(sql);
+	pstmt.setInt(1,num);
 	rs = pstmt.executeQuery();
 	while (rs.next()) {
 	%>
@@ -71,7 +84,7 @@ request.setCharacterEncoding("UTF-8");
 			</ol>
 		</nav>
 
-		<div class="container">
+		<div class="container ">
 			<div class="row">
 				<div class="col-xl-5">
 					<!-- 이미지 제목필요 -->
@@ -84,21 +97,24 @@ request.setCharacterEncoding("UTF-8");
 
 
 
-				<div class="col-xl-6">
-					<label class="fs-7"><%=rs.getString("pID")%></label><br>
-					<label class="fs-5"><%=rs.getString("mCompany")%></label>
-					 <label
-						class="fs-3 fw-bold"><%=rs.getString("pTitle")%></label><br>
-					<label class=""><%=rs.getString("pCategory")%></label>
-					<div class="">
-						<span class="text-warning"> <i class="fa-solid fa-star"></i></span>
-						<span class="fw-bold"> <%=score_%></span>
-					</div>
-					<div class="justify-content-end">
-						<div class="text-end">
-							<span class="fw-bold mx-4 fs-3"><%=rs.getString("pPrice")%>원</span>
+				<div class="col-xl-6 d-flex flex-column justify-content-between">
+					<div>
+						<label class="fs-7"><%=rs.getString("pID")%></label><br>
+						<label class="fs-5"><%=rs.getString("mCompany")%></label>
+						 <p><label
+							class="fs-3 fw-bold"><%=rs.getString("pTitle")%></label><br></p>
+						<label class=""><%=rs.getString("pCategory")%></label>
+						<div class="">
+							<span class="text-warning"> <i class="fa-solid fa-star"></i></span>
+							<span class="fw-bold"> <%=score_%></span>
 						</div>
-						<div class="text-center">
+					</div>
+					<div>
+						<div class="col-md-12 text-end mb-3">
+							<span class="fw-bold mx-4 fs-3 text-end"><%=rs.getString("pPrice")%>원</span>
+						</div>
+					
+						<div class="col-md-12 text-center">
 							<a href="header.jsp"><input type="button" class="btn btn-warning w-75 mx-4"
 								value="구매하기"></a>
 						</div>
@@ -191,8 +207,9 @@ request.setCharacterEncoding("UTF-8");
 					<h3 class="fw-bold" id="review">리뷰</h3>
 					<div class="reviewBox">
 						<%
-						String sql2 = "SELECT * FROM reviewtbl where rPosterID=1;";
+						String sql2 = "SELECT * FROM reviewtbl where rPosterID=?";
 						pstmt = conn.prepareStatement(sql2);
+						pstmt.setInt(1,num);
 						rs = pstmt.executeQuery();
 						while (rs.next()) {
 						%>

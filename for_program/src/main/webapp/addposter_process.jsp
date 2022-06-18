@@ -20,10 +20,10 @@
 		ResultSet rs = null;
 		
 		
-		String userID = (String) session.getAttribute("id");	//아이디 불러오기 왜 안되지? ㅜㅜ
-		/*if (session.getAttribute("id") != null) {
+		String userID = null;	//아이디 불러오기 왜 안되지? ㅜㅜ
+		if (session.getAttribute("id") != null) {
 			userID = (String) session.getAttribute("id");
-		}*/
+		}
 		
 		
 		
@@ -70,6 +70,7 @@
 		String add_p_text = request.getParameter("addText");
 		
 		String add_p_price = request.getParameter("addPrice");
+		if(add_p_price.equals(""))	add_p_price = "0";
 		String add_p_category = request.getParameter("addCategory");
 		
 		String add_p_skillText = request.getParameter("addSkillText");

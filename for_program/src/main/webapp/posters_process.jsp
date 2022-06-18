@@ -14,8 +14,8 @@
 	
 	<!-- 임시로 만듬 -->
 	<%
-		String num = request.getParameter("num");
-		response.sendRedirect("poster.jsp?num="+num);
+		String num = request.getParameter("id");
+		response.sendRedirect("poster.jsp?id="+num);
 	 %>
 </body>
 </html>

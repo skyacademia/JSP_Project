@@ -42,8 +42,8 @@ request.setCharacterEncoding("UTF-8");
 	
 	
 	
-	//--------------------------------------------------------
-	String num_ = request.getParameter("num");
+	//--------------------받은 페이지넘버 저장---------------------------
+	String num_ = request.getParameter("id");
 	int num = 1;
 	if(num_ !=null && !num_.equals("")) 
 		num = Integer.parseInt(num_);
@@ -51,7 +51,7 @@ request.setCharacterEncoding("UTF-8");
 	
 	
 	
-	//--------------------------------------------------------------------------------------------------------
+	//----------------------------------별점평균 쿼리-----------------------------------------------------
 	String sql3 = "SELECT sum(rScore) as sum , count(rScore) as cnt FROM reviewtbl where rPosterID = ? ";
 	pstmt = conn.prepareStatement(sql3);
 	pstmt.setInt(1,num);
@@ -65,7 +65,7 @@ request.setCharacterEncoding("UTF-8");
 
 	}
 	String score_ = String.format("%.2f", score);
-	//--------------------------------------------------------------------------------------------------------
+	//---------------------------------포스터에 해당하는 멤버, 포스터정보 쿼리-------------------------------------------------
 	String sql = "SELECT * FROM posttbl as P " + "inner join membertbl as M " + "on P.pWriter = M.mID "
 			+ "inner join skilltbl as S on S.sMemberID = M.mID where pid=?;";
 	pstmt = conn.prepareStatement(sql);

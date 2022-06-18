@@ -16,7 +16,7 @@
 	<div class="col-xl-9 mt-5">
 		<form action="posters_process.jsp" method="post">
 		  <div class="col-md-4">
-		    <input type="text" class="form-control" id="num" name="num" placeholder="원하는 페이지 입력 예) 5">
+		    <input type="text" class="form-control" id="id" name="id" placeholder="원하는 페이지 입력 예) 5">
 		  </div>
 		  <div class="col-md-4">
 			<input type="submit" value="go"/>

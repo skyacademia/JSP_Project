@@ -21,8 +21,7 @@
 	function addFinish() {
 		var form = document.getElementById("addForm");
 		if (confirm("게시물을 등록 하시겠습니까?")) {
-			form.action = "addposter_process.jsp";
-			form.mothod = "POST";
+			
 			form.submit();
 			alert("등록이 완료되었습니다.");
 		}
@@ -30,7 +29,7 @@
 	function cancel() {
 
 		if (confirm("취소 하시겠습니까?")) {
-			window.location.href = 'http://localhost:8080/for_program/poster.jsp';
+			window.history.back();
 		}
 	}
 </script>
@@ -48,7 +47,8 @@
 	%>
 
 
-	<form name="addForm" id="addForm">
+	<form name="addForm" action = "<%= request.getContextPath()%>/addposter_process.jsp"
+			method = "POST" id="addForm">
 		<div class="container mt-5">
 			<div class="row mx-5">
 				<h3 class="mb-5" style="text-align: center;">게시물 등록 화면</h3>

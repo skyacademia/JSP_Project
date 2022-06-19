@@ -10,7 +10,7 @@ CREATE TABLE `jspsql`.`membertbl` (
   `mMail` VARCHAR(45) NULL,				-- 이메일
   `mAddress` VARCHAR(45) NULL,			-- 주소
   `mText` Text(100) NULL,				-- 자기소개
-  `mCompany` VARCHAR(100) NULL,			-- 소속된 회사명
+  `mCompany` VARCHAR(100) NULL default "개인/프리랜서",			-- 소속된 회사명
   `mThum` VARCHAR(100) NULL,			-- 업로드할 이미지 썸네일명
   
 -- `mSkill` VARCHAR(100) NULL, 은 기술 스택을 1개만 등록할 수 있음,, 	
@@ -42,7 +42,7 @@ CREATE TABLE `jspsql`.`membertbl` (
   `pID` int NOT NULL auto_increment,					-- 포스터아이디, 기본키
   `pTitle` VARCHAR(45) NOT NULL,				-- 제목
   `pWriter` VARCHAR(45) NOT NULL,				-- 글쓴이, 외래키 
-  `pPrice` VARCHAR(45) NOT NULL,				-- 가격
+  `pPrice` VARCHAR(45) NOT NULL default "0",				-- 가격
   `pText` TEXT NOT NULL,						-- 포스팅 글
   `pSkillText` TEXT NOT NULL,					-- 기술 소개
   `pCategory` VARCHAR(45) NOT NULL,				-- 포스터 카테고리
@@ -60,7 +60,7 @@ CREATE TABLE `jspsql`.`reviewtbl` (
   `rWriter` VARCHAR(45) NOT NULL,				-- 리뷰 작성자ID, 외래키
   `rPosterID` int NOT NULL,						-- 포스터ID
   `rScore` FLOAT  NOT NULL,						-- 리뷰점수
-  `rText` VARCHAR(45) NOT NULL,					-- 가격
+  `rText` text NOT NULL,					-- 가격
   PRIMARY KEY (`rID`),
   FOREIGN KEY (rWriter) REFERENCES membertbl(mID) ON UPDATE CASCADE ON delete cascade
   );
@@ -159,10 +159,14 @@ insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName)
 
 insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("만족도 500퍼센터 여러분 기대하셔도 좋습니다.","kmj","100000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+
+모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
-모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 

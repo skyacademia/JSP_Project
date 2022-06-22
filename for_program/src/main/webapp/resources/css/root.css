@@ -1,7 +1,37 @@
-@charset "UTF-8";
+
 :root {
     --white-gray-color: #d5d5d5;
     --blue-color: #616cd4;
     --yellow-color: #fffc5b;
     --temp-color : rgb(221, 237, 193);
+}
+.contour {
+	border-right: 3px solid rgb(209, 209, 209);
+	height: 100%;
+	width: 55%;
+}
+
+#reviewForm fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전 */
+    border: 0; /* 필드셋 테두리 제거 */
+}
+
+#reviewForm input[type=radio] {
+	display: none; /* 라디오박스 감춤 */
+}
+
+#reviewForm label {
+	font-size: 15px;
+	color: transparent;
+	text-shadow: 0 0 0 #f0f0f0;
+}
+#reviewForm label:hover{
+    text-shadow: 0 0 0 #ffc107; /* 마우스 호버 */
+}
+#reviewForm label:hover ~ label{
+    text-shadow: 0 0 0 #ffc107; /* 마우스 호버 뒤에오는 이모지들 */
+}
+#reviewForm input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #ffc107; /* 마우스 클릭 체크 */
 }

@@ -53,7 +53,7 @@
             </ul>
             <% if(id == null){ %>
                 <button class="btn btn-primary mx-1 px-5 fs-5" onclick="location='Login.jsp'">로그인</button>
-                <button class="btn btn-outline-primary mx-1 px-5 fs-5" onclick="location='Register.jsp'" >회원가입</button>
+                <button class="btn btn-outline-primary mx-1 px-5 fs-5" onclick="location='SignUP.jsp'" >회원가입</button>
                 <% }else { %>
             	<button class="btn btn-primary mx-1 px-5 fs-5" onclick="location='Login.jsp'">마이페이지</button>
                 <button class="btn btn-outline-primary mx-1 px-5 fs-5" onclick="location='Register.jsp'" >프로필 수정</button>

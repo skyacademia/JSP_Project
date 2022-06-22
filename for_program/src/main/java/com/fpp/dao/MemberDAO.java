@@ -16,7 +16,9 @@ public class MemberDAO {
     public MemberDAO() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspsql?serverTimezone=UTC", "root", "root");
+//            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspsql?serverTimezone=UTC", "root", "root");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspsql?serverTimezone=UTC", "root", "1234");
+         
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,6 +50,10 @@ public class MemberDAO {
         return -2;
     }
 
+    
+    
+    
+//   thumnail을 저장안한 회원인 경우 로그인시 rs.getString(10)값에 null이 들어가 로그인이 안되는 문제가 발생해서 rs.getString(10)을 삭제하였음
     public int Login(String mID, String mPW) {
         String sql = String.format("SELECT * FROM membertbl WHERE mID = '%s' AND mPW = '%s'", mID, mPW);
         try {
@@ -68,4 +74,21 @@ public class MemberDAO {
         }
         return -2;
     }
+    
+    //----------------------회원 ID에 해당하는 회원 정보------------------
+    public ResultSet get_info(String mID) {
+    	String sql = String.format("select * from membertbl where mID = ?");
+    	ResultSet rs = null;
+        try {
+			PreparedStatement pstmt = c.prepareStatement(sql);
+			pstmt.setString(1, mID);
+			rs = pstmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+        return rs;
+    }
+    
 }

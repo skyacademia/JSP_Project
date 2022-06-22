@@ -21,16 +21,17 @@
 	<%
 		String id = request.getParameter("mID");
 		String pw = request.getParameter("mPW");
-		session.setAttribute("id", id); // 아이디 세션 저장
-		session.setAttribute("pw", pw); // 비밀번호 세션 저장
-		
+		String input = "SignUP.jsp";	//로그인 성공시 이동할 페이지 명
+		String pages = "'"+input+"'"; 
         MemberDAO memberDAO = new MemberDAO();
         int result = memberDAO.Login(id, pw);
         if (result == 1) {
+    		session.setAttribute("id", id); // 아이디 세션 저장
+    		session.setAttribute("pw", pw); // 비밀번호 세션 저장
             PrintWriter script = response.getWriter();
             script.println("<script>");
             script.println("alert('로그인 성공')");
-            script.println("location.href = 'Register.jsp'"); // 로그인 되면 이동할페이지
+            script.println("location.href = " + pages); // 로그인 되면 이동할페이지
             script.println("</script>");
         } else if (result == 0) { // 비밀번호 불일치시
             PrintWriter script = response.getWriter();

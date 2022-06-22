@@ -9,7 +9,7 @@
 </head>
 <body>
 	<!-- header -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-4 mb-5">
         <a class="navbar-brand fs-2" href="#">ForProgram</a>
         <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse" data-bs-target="#navbarNav" 
@@ -25,8 +25,8 @@
                     <a class="nav-link fs-5" href="#">프로젝트 등록</a>
                 </li>
             </ul>
-                <button class="btn btn-primary mx-1 px-5 fs-5">로그인</button>
-                <button class="btn btn-outline-primary mx-1 px-5 fs-5">회원가입</button>
+                <button class="btn btn-primary mx-1 px-5 fs-5" onclick="location.href='Login.jsp'">로그인</button>
+                <button class="btn btn-outline-primary mx-1 px-5 fs-5" onclick="location.href='SignUP.jsp'">회원가입</button>
         </div>
     </nav>
     <!-- header end -->

@@ -8,11 +8,19 @@ public class MemberDTO {
     private static String mMail;
     private static String mAddress;
     private static String mText;
-    private static String mSkill;
+    private static String mCompany;
+    private static String mThum;
 
-    public void setMember(String mID, String mPW, String mName, String mTel, String mMail, String mAddress,
-            String mText,
-            String mSkill) {
+    public static String getmThum() {
+		return mThum;
+	}
+
+	public static void setmThum(String mThum) {
+		MemberDTO.mThum = mThum;
+	}
+
+	public void setMember(String mID, String mPW, String mName, String mTel, String mMail, String mAddress,
+            String mText, String mCompany, String mThum) {
         this.mID = mID;
         this.mPW = mPW;
         this.mName = mName;
@@ -20,7 +28,8 @@ public class MemberDTO {
         this.mMail = mMail;
         this.mAddress = mAddress;
         this.mText = mText;
-        this.mSkill = mSkill;
+        this.mCompany = mCompany;
+        this.mThum = mThum;
     }
 
     public String getmID() {
@@ -79,17 +88,17 @@ public class MemberDTO {
         this.mText = mText;
     }
 
-    public String getmSkill() {
-        return mSkill;
+    public String getmCompany() {
+        return mCompany;
     }
 
-    public void setmSkill(String mSkill) {
-        this.mSkill = mSkill;
+    public void setmCompany(String mCompany) {
+        this.mCompany = mCompany;
     }
 
     public String toString(String mID, String mPW, String mName, String mTel, String mMail, String mAddress,
             String mText, String mSkill) {
 
-        return this.mID + this.mPW + this.mName + this.mTel + this.mMail + this.mAddress + this.mText + this.mSkill;
+        return this.mID + this.mPW + this.mName + this.mTel + this.mMail + this.mAddress + this.mText + this.mCompany + this.mThum;
     }
 }

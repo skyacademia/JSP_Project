@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.fpp.dao.*" %>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +25,6 @@
 	<jsp:include page="header.jsp" />
 	<jsp:include page="category.jsp" />
 
-
-
-
 	<!-- poster-top -->
 	<div class="col-md-9 mt-5">
 		
@@ -46,8 +45,9 @@
             <div class="col-xl-1">
                 <div class="contour"></div>
             </div>
-            <%@ include file = "dbconn.jsp" %>
             <%
+            	MemberDAO memberDAO = new MemberDAO();
+            	Connection conn = memberDAO.c;
 	            PreparedStatement pstmt = null;
 				ResultSet rs = null;
 				String sql = "select * from posttbl where pID=\"p001\"";

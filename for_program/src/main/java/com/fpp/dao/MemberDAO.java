@@ -53,7 +53,7 @@ public class MemberDAO {
     
     
     
-//   thumnail을 저장안한 회원인 경우 로그인시 rs.getString(10)값에 null이 들어가 로그인이 안되는 문제가 발생해서 rs.getString(10)을 삭제하였음
+
     public int Login(String mID, String mPW) {
         String sql = String.format("SELECT * FROM membertbl WHERE mID = '%s' AND mPW = '%s'", mID, mPW);
         try {
@@ -62,7 +62,7 @@ public class MemberDAO {
             if (rs.next()) {
                 if (rs.getString(2).equals(mPW)) {
                     member.setMember(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                    rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                    rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
                     return 1;
                 } else {
                     return 0;

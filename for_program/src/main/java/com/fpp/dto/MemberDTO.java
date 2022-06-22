@@ -8,13 +8,12 @@ public class MemberDTO {
     private static String mMail;
     private static String mAddress;
     private static String mText;
-    private static String mSkill;
     private static String mCompany;
     private static String mThum;
 
     public void setMember(String mID, String mPW, String mName, String mTel, String mMail, String mAddress,
             String mText,
-            String mSkill,String mCompany) {
+            String mCompany) {
         this.mID = mID;
         this.mPW = mPW;
         this.mName = mName;
@@ -81,13 +80,6 @@ public class MemberDTO {
         this.mText = mText;
     }
 
-    public String getmSkill() {
-        return mSkill;
-    }
-
-    public void setmSkill(String mSkill) {
-        this.mSkill = mSkill;
-    }
     public static String getmCompany() {
 		return mCompany;
 	}
@@ -107,6 +99,6 @@ public class MemberDTO {
 	public String toString(String mID, String mPW, String mName, String mTel, String mMail, String mAddress,
             String mText, String mSkill, String mCompany, String mThum) {
 
-        return this.mID + this.mPW + this.mName + this.mTel + this.mMail + this.mAddress + this.mText + this.mSkill + this.mCompany + this.mThum;
+        return this.mID + this.mPW + this.mName + this.mTel + this.mMail + this.mAddress + this.mText +  this.mCompany + this.mThum;
     }
 }

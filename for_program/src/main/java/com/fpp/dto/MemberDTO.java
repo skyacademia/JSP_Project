@@ -9,12 +9,10 @@ public class MemberDTO {
     private static String mAddress;
     private static String mText;
     private static String mSkill;
-    private static String mCompany;
-    private static String mThum;
 
-	public void setMember(String mID, String mPW, String mName, String mTel, String mMail, String mAddress,
+    public void setMember(String mID, String mPW, String mName, String mTel, String mMail, String mAddress,
             String mText,
-            String mCompany, String mThum) {
+            String mSkill) {
         this.mID = mID;
         this.mPW = mPW;
         this.mName = mName;
@@ -22,25 +20,8 @@ public class MemberDTO {
         this.mMail = mMail;
         this.mAddress = mAddress;
         this.mText = mText;
-        this.mCompany = mCompany;
-        this.mThum = mThum;
+        this.mSkill = mSkill;
     }
-
-    public String getmCompany() {
-		return mCompany;
-	}
-
-	public void setmCompany(String mCompany) {
-		MemberDTO.mCompany = mCompany;
-	}
-
-	public String getmThum() {
-		return mThum;
-	}
-
-	public void setmThum(String mThum) {
-		MemberDTO.mThum = mThum;
-	}
 
     public String getmID() {
         return mID;

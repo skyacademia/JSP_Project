@@ -46,11 +46,23 @@
 		        script.println("alert('회원가입 성공')");
 		        script.println("location.href = " + pages); // 로그인 되면 이동할페이지
 		        script.println("</script>");
-		    } else { // 비밀번호 불일치시
+		    } else if (result == 0) { // 비밀번호 불일치시
 		        PrintWriter script = response.getWriter();
 		        script.println("<script>");
-		        script.println("alert('뭔가가 잘못되었습니다.')");
+		        script.println("alert('비밀번호가 틀립니다.')");
 		        script.println("history.back()"); //뒤로가기, 다시 로그인 페이지
+		        script.println("</script>");
+		    } else if (result == -1) { 
+		        PrintWriter script = response.getWriter();
+		        script.println("<script>");
+		        script.println("alert('존재하지 않는 아이디입니다.')");
+		        script.println("history.back()");
+		        script.println("</script>");
+		    } else if (result == -2) { 
+		        PrintWriter script = response.getWriter();
+		        script.println("<script>");
+		        script.println("alert('데이터베이스 오류가 발생했습니다.')");
+		        script.println("history.back()");
 		        script.println("</script>");
 		    }
 		}else{

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "com.fpp.dto.*" %>
+<%@ page import = "java.io.PrintWriter" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,48 +11,37 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <meta charset="UTF-8">
-<title>회원가입</title>
-	<style>
-	  body {
-	    min-height: 100vh;
-	    background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
-	    background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	    background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	    background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	    background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
-	  }
-	  .input-form {
-	    max-width: 680px;
-	
-	    margin-top: 80px;
-	    padding: 32px;
-	
-	    background: #fff;
-	    -webkit-border-radius: 10px;
-	    -moz-border-radius: 10px;
-	    border-radius: 10px;
-	    -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-	    -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-	    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-	  }
-	</style>
+<title>회원 정보 수정</title>
 </head>
 <body>
+	<%
+    	MemberDTO memberDTO = new MemberDTO();
+		String id = (String)session.getAttribute("id");
+		String pw = (String)session.getAttribute("pw");
+		String name = memberDTO.getmName();
+		String tel = memberDTO.getmTel();
+		String email = memberDTO.getmMail();
+		String com = memberDTO.getmCompany();
+		String text = memberDTO.getmText();
+		
+		if(id == null){
+            PrintWriter script = response.getWriter();
+            script.println("<script>");
+            script.println("alert('로그인을 해주세요.')");
+            script.println("location.href = 'Login.jsp'");
+            script.println("</script>");
+		}
+	%>
 	<jsp:include page="header.jsp" />
-	<div class = "container">
-		<div class = "input-form-background row">
-			<div class = "input-form col-md-6 mx-auto my-auto">
-				<h4 class = "mb-3">회원가입</h4>
-				<form class = "validation-form" method="post" name = "fr" action="<%= request.getContextPath()%>/SignUPAction.jsp" novalidate>
-					<div class = "row">
-						<div class = "col-md-9 mb-3">
-							<label for="id">아이디</label>
-							<input type="text" class = "form-control" id="mID" name="mID" maxlength="20" required>
-							<div class = "invalid-feedback">아이디를 입력해주세요.</div>
-						</div>
-						<div class = "col-md-3 my-auto">
-							<input type="button" value = "중복확인" id="chc" name = "chc" onclick="winopen()" class = "btn btn-primary btn-block">
-						</div>
+	<jsp:include page="Mycategory.jsp" />
+	
+			<div class = "input-form col-md-6 mt-5 mx-auto my-auto">
+				<h4 class = "mb-3">회원정보 수정</h4>
+				<form class = "validation-form" method="post" name = "fr" action="<%= request.getContextPath()%>/edit_Member_Action.jsp" novalidate>
+					<div class = "mb-3">
+						<label for="id">아이디</label>
+						<input type="text" class = "form-control" value = "<%=id%>" id="mID" name="mID" maxlength="20" required readonly>
+						<div class = "invalid-feedback">아이디를 입력해주세요.</div>
 					</div>
 					<div class = "mb-3">
 						<label for="name">비밀번호</label>
@@ -60,33 +51,33 @@
 					</div>
 					<div class = "mb-3">
 						<label for="name">이름</label>
-						<input type="text" class = "form-control" id="name" name="name" maxlength="20" placeholder="홍길동" required>
+						<input type="text" class = "form-control" value="<%=name%>" id="name" name="name" maxlength="20" placeholder="홍길동" required>
 						<div class = "invalid-feedback">이름을 입력해주세요.</div>
 					</div>
 					<div class = "mb-3">
 						<label for="tel">연락처</label>
-						<input type="text" class = "form-control" id="tel" name="tel" maxlength="20" placeholder="01000000000" required>
+						<input type="text" class = "form-control" value="<%=tel%>" id="tel" name="tel" maxlength="20" placeholder="01000000000" required>
 						<div class = "invalid-feedback">연락처를 입력해주세요.</div>
 					</div>
 					<div class = "mb-3">
 						<label for="email">이메일</label>
-						<input type="email" class = "form-control" id="email" name="email" maxlength="20" placeholder="ghdrlfehd@naver.com" required>
+						<input type="email" class = "form-control" value="<%=email%>" id="email" name="email" maxlength="20" placeholder="ghdrlfehd@naver.com" required>
 						<div class = "invalid-feedback">이메일을 입력해주세요.</div>
 					</div>
 					<div class = "mb-3">
 						<label for="address">주소</label>
-						<input type="text" class = "form-control" id="post" name="post" maxlength="20" placeholder="우편번호" readonly onclick="findAddr()">
+						<input type="text" class = "form-control" id="post" name="post" maxlength="20" placeholder="우편번호 (눌러주세요)" readonly onclick="findAddr()">
 						<input type="text" class = "form-control" id="addr" name="addr" maxlength="20" placeholder="주소" readonly onclick="findAddr()">
 						<input type="text" class = "form-control" id="addr2" name="addr2" maxlength="20" placeholder="상세주소">
 					</div>
 					<div class = "mb-3">
 						<label for="company">회사명</label>
-						<input type="text" class = "form-control" id="company" name="company" maxlength="30" placeholder="회사명(개인사업자는 개인사업자라고 적어주세요.)" required>
+						<input type="text" class = "form-control" value="<%=com%>" id="company" name="company" maxlength="30" placeholder="회사명(개인사업자는 개인사업자라고 적어주세요.)" required>
 						<div class = "invalid-feedback">회사명을 입력해주세요.</div>
 					</div>
 					<div class = "mb-3">
 						<label for="about">자기소개</label>
-						<Textarea class = "form-control" id="about" name="about" placeholder="자기소개를 해주세요." rows="10" required></Textarea>
+						<Textarea class = "form-control" id="about" name="about" placeholder="자기소개를 해주세요." rows="10" required><%=text%></Textarea>
 						<div class = "invalid-feedback">자기소개를 입력해주세요.</div>
 					</div>
 					<div class = "mb-3">
@@ -97,30 +88,13 @@
 						-->
 					</div>
 			        <hr class="mb-4">
-			        <div class="custom-control custom-checkbox">
-				        <input type="checkbox" class="custom-control-input" id="aggrement" required>
-				        <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
-			        </div>
 			        <div class="mb-4"></div>
-			        <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+			        <button class="btn btn-primary btn-lg btn-block" type="submit">수정 완료</button>
 				</form>
 			</div>
-		</div>
-	</div>
+
 </body>
 <script>
-function winopen(){
-	//	새창을 열어서 페이지를 오픈 후 -> 회원아이디정보를 가지고 중복체크
-	//	아이디가 없으면 알림창과 진행x
-	if(document.fr.mID.value =="" || document.fr.mID.value.length < 0){
-		alert("아이디를 먼저 입력해주세요")
-		document.fr.mID.focus();
-	}else{
-		//	회원정보아이디를 가지고 있는 지 체크하려면 DB에 접근해야한다.
-		//	자바스크립트로 어떻게 DB에 접근할까? => 파라미터로 id값을 가져가서 jsp페이지에서 진행하면 된다.
-		window.open("SignUpIDCheck.jsp?userid="+document.fr.mID.value,"","width=500, height=300");
-	}
-}
 function findAddr(){
 	new daum.Postcode({
         oncomplete: function(data) {

@@ -66,6 +66,21 @@ CREATE TABLE `jspsql`.`reviewtbl` (
   );
   
  
+ -- 구매 테이블
+ CREATE TABLE `jspsql`.`buytbl`(
+	`bID` INT NOT NULL auto_increment,
+    `bUser` VARCHAR(45) NOT NULL,
+    `bPosterID` int NOT NULL,
+    `bPrice` VARCHAR(45) NOT NULL,
+    `bTel` VARCHAR(45) NOT NULL,
+    `bEmail` VARCHAR(45) NOT NULL,
+    `bText` TEXT NULL,
+    PRIMARY KEY(`bID`)
+ 
+ );
+ 
+ 
+ 
   use `jspsql`;
  
  -- membertbl 초기화

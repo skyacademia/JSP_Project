@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.fpp.dao.*"%>
 <%@ page import="java.io.PrintWriter"%>
+<%@ page import="java.util.ArrayList"%>
 <%
 request.setCharacterEncoding("UTF-8");
 %>
@@ -14,22 +15,20 @@ request.setCharacterEncoding("UTF-8");
 	crossorigin="anonymous"></script>
 
 <script>
-
-	function toggleText(){
+	function toggleText() {
 
 		var form = document.getElementById("reviewForm");
 		var btn = document.getElementById("createReviewBtn");
 
-		if(form.className === "d-block"){
+		if (form.className === "d-block") {
 			form.className = "d-none"
 			btn.style.display = 'block';
-		}
-		else{
+		} else {
 			form.className = "d-block"
 			btn.style.display = 'none';
 		}
 	}
-	
+
 	function addreview() {
 		var form = document.getElementById("reviewForm");
 		if (confirm("리뷰 등록 하시겠습니까?")) {
@@ -38,8 +37,8 @@ request.setCharacterEncoding("UTF-8");
 			alert("등록이 완료되었습니다.");
 		}
 	}
-	
-	function fillStart(){
+
+	function fillStart() {
 		var star = document.getEmele
 	}
 </script>
@@ -80,25 +79,28 @@ request.setCharacterEncoding("UTF-8");
 	if (num_ != null && !num_.equals(""))
 		num = Integer.parseInt(num_);
 
-	//----------------------------------별점평균 쿼리-----------------------------------------------------
-	String sql3 = "SELECT sum(rScore) as sum , count(rScore) as cnt FROM reviewtbl where rPosterID = ? ";
-	pstmt = conn.prepareStatement(sql3);
-	pstmt.setInt(1, num);
-	rs = pstmt.executeQuery();
+	//----------------------------------별점평균-----------------------------------------------------
+	PosterDAO pDAO = new PosterDAO();
+	rs = pDAO.get_avgScore(conn, num);
 	while (rs.next()) {
 		cnt = rs.getFloat("cnt");
 		if (cnt != 0) {
 			score = rs.getFloat("sum") / cnt;
 		}
-
 	}
 	String score_ = String.format("%.2f", score);
-	//---------------------------------포스터에 해당하는 멤버, 포스터정보 쿼리-------------------------------------------------
-	String sql = "SELECT * FROM posttbl as P " + "inner join membertbl as M " + "on P.pWriter = M.mID "
-			+ "inner join skilltbl as S on S.sMemberID = M.mID where pid=?;";
-	pstmt = conn.prepareStatement(sql);
-	pstmt.setInt(1, num);
-	rs = pstmt.executeQuery();
+
+	/*	//-------------------------(미완)해당 상품 구매자 찾기----------------------
+		BuyDAO bDAO = new BuyDAO();
+		ArrayList<String> buyers = new ArrayList<>();
+		rs = bDAO.get_info(conn, num);
+		if (rs != null) {		//-------구매했다면 null이 아닌 데이터가 들어있을것
+			while (rs.next()) {
+		buyers.add(rs.getString("bUser")); 		//구매자들을 ArrayList에 담는다..
+			}
+		}*/
+	//---------------------------------포스터정보 멤버정보-------------------------------------------------
+	rs = pDAO.get_poster_member(conn, num);
 	while (rs.next()) {
 	%>
 
@@ -111,7 +113,6 @@ request.setCharacterEncoding("UTF-8");
 				<li class="breadcrumb-item active" aria-current="page"><%=rs.getString("pCategory")%></li>
 			</ol>
 		</nav>
-
 		<div class="container ">
 			<div class="row">
 				<div class="col-xl-5">
@@ -122,9 +123,6 @@ request.setCharacterEncoding("UTF-8");
 				<div class="col-xl-1">
 					<div class="contour"></div>
 				</div>
-
-
-
 				<div class="col-xl-6 d-flex flex-column justify-content-between">
 					<div>
 						<label class="fs-7"><%=rs.getString("pID")%></label><br> <label
@@ -144,8 +142,12 @@ request.setCharacterEncoding("UTF-8");
 						</div>
 
 						<div class="col-md-12 text-center">
-							<a href="header.jsp"><input type="button"
-								class="btn btn-warning w-75 mx-4" value="구매하기"></a>
+							<form name="buyform" action="buy.jsp">
+								<textarea class="d-none" id="pID" name="pID" rows="1"><%=num%></textarea>
+								<textarea class="d-none" id="pWriter" name="pWriter" rows="1"><%=rs.getString("pWriter")%></textarea>
+								<input type="submit" class="btn btn-warning w-75 mx-4"
+									value="구매하기">
+							</form>
 						</div>
 					</div>
 				</div>
@@ -193,26 +195,18 @@ request.setCharacterEncoding("UTF-8");
 						<p><%=rs.getString("mTel")%></p>
 						<p><%=rs.getString("mMail")%></p>
 						<p><%=rs.getString("mText")%></p>
-
-
-
-
 						<p><%=rs.getString("sSkill1")%></p>
-
 						<%
 						if (rs.getString("sSkill2") != null) {
 						%>
 						<p><%=rs.getString("sSkill2")%></p>
 						<%
 						}
-
 						if (rs.getString("sSkill3") != null) {
 						%>
-
 						<p><%=rs.getString("sSkill3")%></p>
 						<%
 						}
-
 						}
 						%>
 					</div>
@@ -224,36 +218,35 @@ request.setCharacterEncoding("UTF-8");
 					<h3 class="fw-bold" id="review">리뷰</h3>
 					<div class="reviewBox">
 						<%
-						String sql2 = "SELECT * FROM reviewtbl where rPosterID=?";
-						pstmt = conn.prepareStatement(sql2);
-						pstmt.setInt(1, num);
-						rs = pstmt.executeQuery();
+						rs = pDAO.get_review(conn, num);
+
 						while (rs.next()) {
 						%>
 						<span class="text-warning"> <i class="fa-solid fa-star"></i></span>
-							<span class="fw-bold"><%=rs.getFloat("rScore")%></span>
-							<span class="fw-bold"><%=rs.getString("rWriter")%></span>
+						<span class="fw-bold"><%=rs.getFloat("rScore")%></span> <span
+							class="fw-bold"><%=rs.getString("rWriter")%></span>
 						<p class="mt-2"><%=rs.getString("rText")%></p>
 						<hr>
 						<%
 						}
-						pstmt.close();
-						conn.close();
 						%>
 						<!-- 로그인된 아이디, 별점, 리뷰텍스트 ,,, 기본설정은 hidden 누르면 보이게... 스크룰 맨아래로 -->
-						<form id="reviewForm" action="review_process.jsp"
-							class="d-none">
+						<form id="reviewForm" action="review_process.jsp" class="d-none">
 							<div class="row d-flex ">
 								<div class="col-md-4">
 									<span class="fw-bold"><%=id%></span>
 									<fieldset class="mx-3">
-									<div style="cursor:default" oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
-										  <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-								        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-								        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-								        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-								        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-								        </div>
+										<div style="cursor: default" oncontextmenu="return false"
+											ondragstart="return false" onselectstart="return false">
+											<input type="radio" name="rating" value="5" id="rate1"><label
+												for="rate1">⭐</label> <input type="radio" name="rating"
+												value="4" id="rate2"><label for="rate2">⭐</label> <input
+												type="radio" name="rating" value="3" id="rate3"><label
+												for="rate3">⭐</label> <input type="radio" name="rating"
+												value="2" id="rate4"><label for="rate4">⭐</label> <input
+												type="radio" name="rating" value="1" id="rate5"><label
+												for="rate5">⭐</label>
+										</div>
 									</fieldset>
 								</div>
 							</div>
@@ -262,23 +255,23 @@ request.setCharacterEncoding("UTF-8");
 									id="addReviewText" name="addReviewText" rows="5"></textarea>
 							</div>
 							<input type="button" class="btn btn-primary mt-3" value="등록 완료"
-								onclick="addreview()">
-							<input type="button" class="btn btn-outline-primary mt-3" value="취소"
+								onclick="addreview()"> <input type="button"
+								class="btn btn-outline-primary mt-3" value="취소"
 								onclick="toggleText()">
-							<textarea class="d-none"
-									id="pid" name="pid" rows="1"><%=num %></textarea>
+							<textarea class="d-none" id="pid" name="pid" rows="1"><%=num%></textarea>
 						</form>
-						<% if(id == null){ %>
-							<p class="mt-3">로그인 시 리뷰를 남길 수 있습니다.</p>
-						<%}else{ %>
-							
+						<%
+						if (id == null) {
+						%>
+						<p class="mt-3">로그인 시 리뷰를 남길 수 있습니다.</p>
+						<%
+						} else {
+						%>
 						<input type="button" id="createReviewBtn"
-							class="btn btn-primary mt-3" value="리뷰 등록"
-							onclick="toggleText()">
-						<%} %>
-
-
-
+							class="btn btn-primary mt-3" value="리뷰 등록" onclick="toggleText()">
+						<%
+						}
+						%>
 					</div>
 				</div>
 			</div>
@@ -288,6 +281,7 @@ request.setCharacterEncoding("UTF-8");
 	</div>
 
 	<footer>footer</footer>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

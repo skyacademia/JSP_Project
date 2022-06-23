@@ -8,6 +8,17 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
+<%
+	String id;
+	try{	
+		id = (String)pageContext.getSession().getAttribute("id");
+	}catch(Exception e){
+		id = null;
+	}
+	
+	
+%>
 	<!-- header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
         <a class="navbar-brand fs-2" href="#">ForProgram</a>
@@ -22,11 +33,34 @@
                     <a class="nav-link fs-5" href="#">프로젝트 입력</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" href="#">프로젝트 등록</a>
+                    <a class="nav-link" href="posters.jsp">(임시)프로젝트 목록</a>
                 </li>
+              <% if(id == null){ %>
+               	<li class="nav-item">
+                    <a class="nav-link fs-5" href="header.jsp">프로젝트 등록</a>
+                </li>
+                <li class="nav-item">
+                	<span class="nav-link">로그인을 해주세요!!!!@!@!@</span>
+                </li>
+            	<% }else { %>
+                <li class="nav-item">
+                    <a class="nav-link fs-5" href="addposter.jsp">프로젝트 등록</a>
+                </li>
+                <li class="nav-item">
+                	<span class="nav-link fs-5">로그인됨 : <%=id %></span>
+                </li>
+               <% } %>
             </ul>
-                <button class="btn btn-primary mx-1 px-5 fs-5">로그인</button>
-                <button class="btn btn-outline-primary mx-1 px-5 fs-5">회원가입</button>
+            <% if(id == null){ %>
+                <button class="btn btn-primary mx-1 px-5 fs-5" onclick="location='Login.jsp'">로그인</button>
+                <button class="btn btn-outline-primary mx-1 px-5 fs-5" onclick="location='SignUP.jsp'" >회원가입</button>
+                <% }else { %>
+            	<button class="btn btn-primary mx-1 px-5 fs-5" onclick="location='Login.jsp'">마이페이지</button>
+            	<form action="Logout.jsp" method = "post">
+                	<button class="btn btn-outline-primary mx-1 px-5 fs-5" type = "submit" >로그아웃</button>
+            	</form>
+                
+            <% } %>
         </div>
     </nav>
     <!-- header end -->

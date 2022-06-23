@@ -21,8 +21,6 @@
 	<%
 		String id = request.getParameter("mID");
 		String pw = request.getParameter("mPW");
-		session.setAttribute("id", id); // 아이디 세션 저장
-		session.setAttribute("pw", pw); // 비밀번호 세션 저장
 		
         MemberDAO memberDAO = new MemberDAO();
         int result = memberDAO.Login(id, pw);
@@ -30,7 +28,9 @@
             PrintWriter script = response.getWriter();
             script.println("<script>");
             script.println("alert('로그인 성공')");
-            script.println("location.href = 'Register.jsp'"); // 로그인 되면 이동할페이지
+            session.setAttribute("id", id); // 아이디 세션 저장
+    		session.setAttribute("pw", pw); // 비밀번호 세션 저장
+            script.println("location.href = 'poster.jsp'"); // 로그인 되면 이동할페이지
             script.println("</script>");
         } else if (result == 0) { // 비밀번호 불일치시
             PrintWriter script = response.getWriter();

@@ -10,7 +10,7 @@ import java.sql.Statement;
 import com.fpp.dto.*;;
 
 public class MemberDAO {
-    private Connection c;
+    public Connection c;
     MemberDTO member = new MemberDTO();
 
     public MemberDAO() {
@@ -23,26 +23,49 @@ public class MemberDAO {
     }
 
     public int Register(String mID, String mPW, String mName, String mTel, String mMail, String mAddress, String mText,
-            String mSkill) {
-        String sql = "INSERT INTO membertbl VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    		String mCompany, String mThum) {
+        String sql = "INSERT INTO membertbl VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pstmt = c.prepareStatement(sql);
 
-            pstmt.setString(1, "");
-            pstmt.setString(2, "");
-            pstmt.setString(3, "");
-            pstmt.setString(4, "");
-            pstmt.setString(5, "");
-            pstmt.setString(6, "");
-            pstmt.setString(7, "");
-            pstmt.setString(8, "");
-
-            return pstmt.executeUpdate();
+            pstmt.setString(1, mID);
+            pstmt.setString(2, mPW);
+            pstmt.setString(3, mName);
+            pstmt.setString(4, mTel);
+            pstmt.setString(5, mMail);
+            pstmt.setString(6, mAddress);
+            pstmt.setString(7, mText);
+            pstmt.setString(8, mCompany);
+            pstmt.setString(9, mThum);
+            
+            int r = pstmt.executeUpdate();
+            return r;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return -2;
+    }
+    
+    public int idCheck(String mID) {
+    	
+    	String sql = "SELECT mID FROM membertbl WHERE mID = ?";
+    	int value = -1;
+    	try {
+            PreparedStatement pstmt = c.prepareStatement(sql);
+            pstmt.setString(1, mID);
+            ResultSet rs = pstmt.executeQuery();
+            
+            if(rs.next())
+            	value = 0;
+            else
+            	value = 1;
+            
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return value;
     }
 
     public int Login(String mID, String mPW) {
@@ -53,8 +76,7 @@ public class MemberDAO {
             if (rs.next()) {
                 if (rs.getString(2).equals(mPW)) {
                     member.setMember(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                            rs.getString(5),
-                            rs.getString(6), rs.getString(7), rs.getString(8));
+                    rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
                     return 1;
                 } else {
                     return 0;

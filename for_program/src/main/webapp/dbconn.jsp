@@ -15,7 +15,7 @@
 	{
 	String url = "jdbc:mysql://localhost:3306/jspsql";
 	String user = "root";
-	String password = "1234";
+	String password = "root";
 	
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	conn = DriverManager.getConnection(url,user,password);

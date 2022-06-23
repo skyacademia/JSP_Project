@@ -39,13 +39,33 @@ public class MemberDAO {
             pstmt.setString(9, mThum);
             
             int r = pstmt.executeUpdate();
-            System.out.println(r);
             return r;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return -2;
+    }
+    
+    public int idCheck(String mID) {
+    	
+    	String sql = "SELECT mID FROM membertbl WHERE mID = ?";
+    	int value = -1;
+    	try {
+            PreparedStatement pstmt = c.prepareStatement(sql);
+            pstmt.setString(1, mID);
+            ResultSet rs = pstmt.executeQuery();
+            
+            if(rs.next())
+            	value = 0;
+            else
+            	value = 1;
+            
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return value;
     }
 
     public int Login(String mID, String mPW) {

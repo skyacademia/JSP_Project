@@ -41,14 +41,20 @@
 		<div class = "input-form-background row">
 			<div class = "input-form col-md-6 mx-auto my-auto">
 				<h4 class = "mb-3">회원가입</h4>
-				<form class = "validation-form" method="post" action="<%= request.getContextPath()%>/SignUPAction.jsp" novalidate>
-					<div class = "mb-3">
-						<label for="id">아이디</label>
-						<input type="text" class = "form-control" id="mID" name="mID" maxlength="20" required>
-						<div class = "invalid-feedback">아이디를 입력해주세요.</div>
+				<form class = "validation-form" method="post" name = "fr" action="<%= request.getContextPath()%>/SignUPAction.jsp" novalidate>
+					<div class = "row">
+						<div class = "col-md-9 mb-3">
+							<label for="id">아이디</label>
+							<input type="text" class = "form-control" id="mID" name="mID" maxlength="20" required>
+							<div class = "invalid-feedback">아이디를 입력해주세요.</div>
+						</div>
+						<div class = "col-md-3 my-auto">
+							<input type="button" value = "중복확인" id="chc" name = "chc" onclick="winopen()" class = "btn btn-primary btn-block">
+						</div>
 					</div>
 					<div class = "mb-3">
 						<label for="name">비밀번호</label>
+						<label for="name" style = "color:gray;">특수문자는 #?!@%^&*만 사용 가능합니다.</label>
 						<input type="password" class = "form-control" id="mPW" name="mPW" maxlength="20" required>
 						<div class = "invalid-feedback">비밀번호를 입력해주세요.</div>
 					</div>
@@ -103,6 +109,18 @@
 	</div>
 </body>
 <script>
+function winopen(){
+	//	새창을 열어서 페이지를 오픈 후 -> 회원아이디정보를 가지고 중복체크
+	//	아이디가 없으면 알림창과 진행x
+	if(document.fr.mID.value =="" || document.fr.mID.value.length < 0){
+		alert("아이디를 먼저 입력해주세요")
+		document.fr.mID.focus();
+	}else{
+		//	회원정보아이디를 가지고 있는 지 체크하려면 DB에 접근해야한다.
+		//	자바스크립트로 어떻게 DB에 접근할까? => 파라미터로 id값을 가져가서 jsp페이지에서 진행하면 된다.
+		window.open("SignUpIDCheck.jsp?userid="+document.fr.mID.value,"","width=500, height=300");
+	}
+}
 function findAddr(){
 	new daum.Postcode({
         oncomplete: function(data) {

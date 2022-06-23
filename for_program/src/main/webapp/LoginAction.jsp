@@ -31,6 +31,8 @@
             session.setAttribute("id", id); // 아이디 세션 저장
     		session.setAttribute("pw", pw); // 비밀번호 세션 저장
             script.println("location.href = 'poster.jsp'"); // 로그인 되면 이동할페이지
+    	    //String referer = (String)request.getHeader("REFERER");
+    	    //response.sendRedirect(referer);  //이건 이전페이지로 가는것.
             script.println("</script>");
         } else if (result == 0) { // 비밀번호 불일치시
             PrintWriter script = response.getWriter();

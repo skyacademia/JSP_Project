@@ -16,8 +16,8 @@ public class MemberDAO {
     public MemberDAO() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-//            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspsql?serverTimezone=UTC", "root", "root");
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspsql?serverTimezone=UTC", "root", "1234");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspsql?serverTimezone=UTC", "root", "root");
+//            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspsql?serverTimezone=UTC", "root", "1234");
          
         } catch (Exception e) {
             e.printStackTrace();

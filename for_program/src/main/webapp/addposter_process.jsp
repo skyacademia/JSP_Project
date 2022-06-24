@@ -45,7 +45,7 @@
 			{
 				out.println("등록 실패");
 			}
-			response.sendRedirect("poster.jsp");
+			response.sendRedirect("posters.jsp");
 	%>
 </body>
 </html>

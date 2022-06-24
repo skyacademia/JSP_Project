@@ -25,8 +25,8 @@
 </head>
 
 <body>
-
-  <!--메뉴-->
+		<jsp:include page="header.jsp" />
+  <!--메뉴
   <div class="container">
     <nav class="navbar navbar-expand-md fixed-top bg-white">
       <div class="container-fluid">
@@ -54,7 +54,7 @@
         </div>                         
       </div>
     </nav>
-
+-->
     <!--이미지-->
     <div class="container-fluid">
       <img src="./resources/images/mainImg.jpg" class="img-fluid w-100" alt="...">

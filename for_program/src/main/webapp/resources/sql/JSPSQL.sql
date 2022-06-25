@@ -84,11 +84,11 @@ CREATE TABLE `jspsql`.`reviewtbl` (
   use `jspsql`;
  
  -- membertbl 초기화
-insert into membertbl values ("kys","1234","김예성","01011111111","temp1@naver.com","인천 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요! 이건 왜있는건가요? 잘 모르겟네요!  이건 왜있는건가요? 잘 모르겟네요!","KAKAO","thumnail.png");
-insert into membertbl values ("kms","1234","김민섭","01022222222","temp2@naver.com","서울 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","KAKAO",null);
-insert into membertbl values ("bdh","1234","배동훈","01033333333","temp3@naver.com","경기 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","당근마켓",null);
-insert into membertbl values ("kmj","1234","김미준","01044444444","temp4@naver.com","충북 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","애플",null);
-insert into membertbl values ("imp","1234","이무표","01055555555","temp5@naver.com","부산 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","테슬라",null);
+insert into membertbl values ("kys","1234","김예성","01011111111","temp1@naver.com","인천 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요! 이건 왜있는건가요? 잘 모르겟네요!  이건 왜있는건가요? 잘 모르겟네요!","KAKAO","defaultMember.png");
+insert into membertbl values ("kms","1234","김민섭","01022222222","temp2@naver.com","서울 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","KAKAO","defaultMember.png");
+insert into membertbl values ("bdh","1234","배동훈","01033333333","temp3@naver.com","경기 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","당근마켓","defaultMember.png");
+insert into membertbl values ("kmj","1234","김미준","01044444444","temp4@naver.com","충북 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","애플","defaultMember.png");
+insert into membertbl values ("imp","1234","이무표","01055555555","temp5@naver.com","부산 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","테슬라","defaultMember.png");
 
 
 -- skilltbl 초기화
@@ -138,7 +138,7 @@ insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName)
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
-"인공지능","thumnail.png");
+"인공지능","defaultThum.png");
 
 insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("다비켜! 전설 유니크 에픽 개발자가 나가신다!","kms","5000000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
@@ -154,7 +154,7 @@ insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName)
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
-"데이터사이언스","thumnail2.png");
+"데이터사이언스","defaultThum.png");
 
 insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("모두 주목! 나는 한번만 말한다 클릭해라..","bdh","50000000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
@@ -170,7 +170,7 @@ insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName)
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
-"프론트엔드",null);
+"프론트엔드","defaultThum.png");
 
 insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("만족도 500퍼센터 여러분 기대하셔도 좋습니다.","kmj","100000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
@@ -190,7 +190,7 @@ insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName)
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
-"백엔드",null);
+"백엔드","defaultThum.png");
 
 insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("클릭클릭!","imp","50000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
@@ -206,4 +206,4 @@ insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName)
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
-"풀스택",null);
+"풀스택","defaultThum.png");

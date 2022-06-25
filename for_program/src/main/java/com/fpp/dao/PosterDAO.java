@@ -94,7 +94,7 @@ public class PosterDAO {
 			pstmt.setString(4,pText);
 			pstmt.setString(5,pSkillText);
 			pstmt.setString(6,pCategory);
-			pstmt.setString(7,null);
+			pstmt.setString(7,pImageName);
 			row = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

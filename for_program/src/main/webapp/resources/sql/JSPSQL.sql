@@ -9,8 +9,8 @@ CREATE TABLE `jspsql`.`membertbl` (
   `mTel` VARCHAR(45) NOT NULL,			-- 연락처
   `mMail` VARCHAR(45) NULL,				-- 이메일
   `mAddress` VARCHAR(45) NULL,			-- 주소
-  `mText` VARCHAR(100) NULL,			-- 자기소개
-  `mCompany` VARCHAR(100) NULL,			-- 소속된 회사명
+  `mText` Text(100) NULL,				-- 자기소개
+  `mCompany` VARCHAR(100),			-- 소속된 회사명
   `mThum` VARCHAR(100) NULL,			-- 업로드할 이미지 썸네일명
   
 -- `mSkill` VARCHAR(100) NULL, 은 기술 스택을 1개만 등록할 수 있음,, 	
@@ -39,11 +39,12 @@ CREATE TABLE `jspsql`.`membertbl` (
   
   --  포스터 테이블
   CREATE TABLE `jspsql`.`posttbl` (
-  `pID` VARCHAR(45) NOT NULL,					-- 포스터아이디, 기본키
+  `pID` int NOT NULL auto_increment,					-- 포스터아이디, 기본키
   `pTitle` VARCHAR(45) NOT NULL,				-- 제목
   `pWriter` VARCHAR(45) NOT NULL,				-- 글쓴이, 외래키 
   `pPrice` VARCHAR(45) NOT NULL,				-- 가격
-  `pText` TEXT(10000) NOT NULL,					-- 포스팅 글
+  `pText` TEXT NOT NULL,						-- 포스팅 글
+  `pSkillText` TEXT NOT NULL,					-- 기술 소개
   `pCategory` VARCHAR(45) NOT NULL,				-- 포스터 카테고리
   `pImageName` VARCHAR(45) NULL,				-- 업로드 이미지 명, 업로드한게 없다면 NULL -> 기본이미지를 띄우기
   
@@ -57,22 +58,37 @@ CREATE TABLE `jspsql`.`membertbl` (
 CREATE TABLE `jspsql`.`reviewtbl` (
   `rID` INT NOT NULL auto_increment,			-- 리뷰ID  기본키때문에 만든것,, 쓰이진 않을듯
   `rWriter` VARCHAR(45) NOT NULL,				-- 리뷰 작성자ID, 외래키
-  `rPosterID` VARCHAR(45) NOT NULL,				-- 포스터ID
+  `rPosterID` int NOT NULL,						-- 포스터ID
   `rScore` FLOAT  NOT NULL,						-- 리뷰점수
-  `rText` VARCHAR(45) NOT NULL,					-- 가격
+  `rText` text NOT NULL,					-- 가격
   PRIMARY KEY (`rID`),
   FOREIGN KEY (rWriter) REFERENCES membertbl(mID) ON UPDATE CASCADE ON delete cascade
   );
   
  
+ -- 구매 테이블
+ CREATE TABLE `jspsql`.`buytbl`(
+	`bID` INT NOT NULL auto_increment,
+    `bUser` VARCHAR(45) NOT NULL,
+    `bPosterID` int NOT NULL,
+    `bPrice` VARCHAR(45) NOT NULL,
+    `bTel` VARCHAR(45) NOT NULL,
+    `bEmail` VARCHAR(45) NOT NULL,
+    `bText` TEXT NULL,
+    PRIMARY KEY(`bID`)
+ 
+ );
+ 
+ 
+ 
   use `jspsql`;
  
  -- membertbl 초기화
-insert into membertbl values ("kys","1234","김예성","01011111111","temp1@naver.com","인천 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요! 이건 왜있는건가요? 잘 모르겟네요!  이건 왜있는건가요? 잘 모르겟네요!","KAKAO","thumnail.png");
-insert into membertbl values ("kms","1234","김민섭","01022222222","temp2@naver.com","서울 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","KAKAO",null);
-insert into membertbl values ("bdh","1234","배동훈","01033333333","temp3@naver.com","경기 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","당근마켓",null);
-insert into membertbl values ("kmj","1234","김미준","01044444444","temp4@naver.com","충북 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","애플",null);
-insert into membertbl values ("imp","1234","이무표","01055555555","temp5@naver.com","부산 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","테슬라",null);
+insert into membertbl values ("kys","1234","김예성","01011111111","temp1@naver.com","인천 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요! 이건 왜있는건가요? 잘 모르겟네요!  이건 왜있는건가요? 잘 모르겟네요!","KAKAO","defaultMember.png");
+insert into membertbl values ("kms","1234","김민섭","01022222222","temp2@naver.com","서울 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","KAKAO","defaultMember.png");
+insert into membertbl values ("bdh","1234","배동훈","01033333333","temp3@naver.com","경기 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","당근마켓","defaultMember.png");
+insert into membertbl values ("kmj","1234","김미준","01044444444","temp4@naver.com","충북 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","애플","defaultMember.png");
+insert into membertbl values ("imp","1234","이무표","01055555555","temp5@naver.com","부산 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","테슬라","defaultMember.png");
 
 
 -- skilltbl 초기화
@@ -85,22 +101,30 @@ insert into skilltbl values ("imp","Cpp","Python","JavaScript");
 
 
 -- reviewtbl 초기화
-insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("imp","p001",5,"아 정말 좋은 회사입니다. 정말 인정인정~");
-insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("imp","p001",5,"아 킹아킹아 좋은 회사입니다. 정말 인정인정~");
-insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("imp","p001",5,"아 정말정정말말 좋은 회사입니다. 정말 인정인정~");
-insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kys","p001",4.5,"위에사람 매크로 쩌네 ㅡㅡ");
-insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("bdh","p001",5,"너무 좋은 회사.. 여기에 외주맡기세요");
-insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kms","p001",1,"다 돈주고 샀네 사기임 여기 하지마삼");
-insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kys","p002",4.5,"나이스 킹아킹아");
-insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kmj","p002",5,"너무 좋은 회사.. 내가 꼭 들어가고 말꺼야");
-insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kms","p002",1,"다 돈주고 샀네 사기임 여기 하지마삼");
-
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("imp",1,5,"아 정말 좋은 회사입니다. 정말 인정인정~");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("imp",3,5,"아 킹아킹아 좋은 회사입니다. 정말 인정인정~");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("imp",1,5,"아 정말정정말말 좋은 회사입니다. 정말 인정인정~");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kys",6,4.5,"위에사람 매크로 쩌네 ㅡㅡ");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("bdh",6,5,"너무 좋은 회사.. 여기에 외주맡기세요");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kms",6,1,"다 돈주고 샀네 사기임 여기 하지마삼");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kys",3,4.5,"나이스 킹아킹아");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kmj",3,5,"너무 좋은 회사.. 내가 꼭 들어가고 말꺼야");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kms",3,1,"다 돈주고 샀네 사기임 여기 하지마삼");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("imp",1,3.7,"아 정말 좋은 회사입니다. 정말 인정인정~");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("imp",3,5,"아 킹아킹아 좋은 회사입니다. 정말 인정인정~");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("imp",1,2.2,"아 정말정정말말 좋은 회사입니다. 정말 인정인정~");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kys",6,4.5,"위에사람 매크로 쩌네 ㅡㅡ");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("bdh",6,5,"너무 좋은 회사.. 여기에 외주맡기세요");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kms",6,1,"다 돈주고 샀네 사기임 여기 하지마삼");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kys",3,4.5,"나이스 킹아킹아");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kmj",3,5,"너무 좋은 회사.. 내가 꼭 들어가고 말꺼야");
+insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("kms",3,1,"다 돈주고 샀네 사기임 여기 하지마삼");
 
 
 
 
 -- posttbl 초기화
-insert into posttbl values ("p001","만능 개발자 구하시나요? 클릭클릭!","kys","500000",
+insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("만능 개발자 구하시나요? 클릭클릭!","kys","500000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
@@ -110,9 +134,13 @@ insert into posttbl values ("p001","만능 개발자 구하시나요? 클릭클�
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... ",
-"인공지능","thumnail.png");
+"모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
+"인공지능","defaultThum.png");
 
-insert into posttbl values ("p002","다비켜! 전설 유니크 에픽 개발자가 나가신다!","kms","5000000",
+insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("다비켜! 전설 유니크 에픽 개발자가 나가신다!","kms","5000000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
@@ -122,9 +150,13 @@ insert into posttbl values ("p002","다비켜! 전설 유니크 에픽 개발자
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... ",
-"데이터사이언스","thumnail2.png");
+"모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
+"데이터사이언스","defaultThum.png");
 
-insert into posttbl values ("p003","모두 주목! 나는 한번만 말한다 클릭해라..","bdh","50000000",
+insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("모두 주목! 나는 한번만 말한다 클릭해라..","bdh","50000000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
@@ -134,21 +166,33 @@ insert into posttbl values ("p003","모두 주목! 나는 한번만 말한다 �
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... ",
-"프론트엔드",null);
+"모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
+"프론트엔드","defaultThum.png");
 
-insert into posttbl values ("p004","만족도 500퍼센터 여러분 기대하셔도 좋습니다.","kmj","100000",
+insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("만족도 500퍼센터 여러분 기대하셔도 좋습니다.","kmj","100000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
-모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
-모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
-모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
-모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
-모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
-모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
-모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
-모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... ",
-"백엔드",null);
 
-insert into posttbl values ("p005","클릭클릭!","imp","50000",
+모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+
+모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+
+모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+
+모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
+모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... ",
+"모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
+"백엔드","defaultThum.png");
+
+insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("클릭클릭!","imp","50000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
@@ -158,4 +202,8 @@ insert into posttbl values ("p005","클릭클릭!","imp","50000",
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... ",
-"풀스택",null);
+"모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...
+모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
+"풀스택","defaultThum.png");

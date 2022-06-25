@@ -62,7 +62,22 @@
 								<option selected>인공지능</option>
 								<option value="백앤드">백앤드</option>
 								<option value="프론트앤드">프론트앤드</option>
-								<option value="Three">Three</option>
+								<option value="웹풀스택">웹풀스택</option>
+								<option value="안드로이드">안드로이드</option>
+								<option value="IOS">IOS</option>
+								<option value="하이브리드앱">하이브리드앱</option>
+								<option value="게임클라이언트">게임클라이언트</option>
+								<option value="게임서버">게임서버</option>
+								<option value="DBA">DBA</option>
+								<option value="데이터엔지니어">데이터엔지니어</option>
+								<option value="머신러닝">머신러닝</option>
+								<option value="시스템소프트웨어">시스템소프트웨어</option>
+								<option value="devOPs">devOPs</option>
+								<option value="사물인터넷(IoT)">사물인터넷(IoT)</option>
+								<option value="인터넷보안">인터넷보안</option>
+								<option value="응용프로그램">응용프로그램</option>
+								<option value="QA">QA</option>
+								<option value="VR/AR/3D">VR/AR/3D</option>
 							</select>
 						</div>
 					</div>

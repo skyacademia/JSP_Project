@@ -30,7 +30,7 @@
 
 	<%
 	request.setCharacterEncoding("UTF-8");
-	
+
 	String id;
 	try {
 		id = (String) pageContext.getSession().getAttribute("id");
@@ -83,62 +83,68 @@
 	}
 	%>
 	<!-- buy -->
-	<div class="container mt-5">
-		<form name="buyForm" method="post"
-			action="<%=request.getContextPath()%>/buy_process.jsp" method="POST"
-			id="buyForm">
-			<fieldset>
-				<legend>구매 회원 정보</legend>	
-				<textarea class="d-none" id="pID" name="pID"><%=pID %></textarea>
-					
-				<div class="mb-2 row">
-					<label for="staticEmail" class="col-sm-2 col-form-label">구매
-						회원ID</label>
-					<div class="col-lg-5">
-						<input type="text" readonly class="form-control-plaintext fw-bold"
-							id="bUser" name="bUser" value="<%=id%>">
-					</div>
-				</div>
-				<div class="mb-2 row">
-					<label for="staticEmail" class="col-sm-2 col-form-label">구매
-						가격</label>
-					<div class="col-lg-5">
-						<input type="text" readonly class="form-control-plaintext fw-bold"
-							id="bPrice" name="bPrice" value="<%=bPrice%>">
-					</div>
-				</div>
-				<div class="mb-2 row">
-					<label for="staticEmail" class="col-sm-2 col-form-label">연락처</label>
-					<div class="col-lg-5">
-						<input type="text" readonly class="form-control-plaintext fw-bold"
-							id="bTel" name="bTel" value="<%=bTel%>">
-					</div>
-				</div>
-				<div class="mb-2 row">
-					<label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
-					<div class="col-lg-5">
-						<input type="text" readonly class="form-control-plaintext fw-bold"
-							id="bEmail" name="bEmail" value="<%=bMail%>">
-					</div>
-				</div>
-				<div class="mb-2 row">
-					<label for="staticEmail" class="col-sm-2 col-form-label">희망
-						요구사항</label>
-					<div class="col-lg-12">
-						<textarea class="form-control" placeholder="구체적으로 요구사항을 입력해 주세요"
-							id="buyText" name="buyText" cols="20" wrap="hard" rows="7">직접 상담</textarea>
-					</div>
-				</div>
-				<div class="mb-2 row">
-					<div class="col-lg">
-						<input type="button" value="구매 신청하기" class="btn btn-primary"
-							onclick="buyFinish()"> <input type="button" value="뒤로가기"
-							class="btn btn-outline-primary" onclick="cancel()">
+	<div class="container">
+		<div class="row">
+			<form name="buyForm" method="post"
+				action="<%=request.getContextPath()%>/buy_process.jsp" method="POST"
+				id="buyForm">
+				<fieldset>
+					<legend class="mt-5 text-center">구매 회원 정보</legend>
+					<textarea class="d-none" id="pID" name="pID"><%=pID%></textarea>
 
+					<div class="mb-2 row">
+						<label for="staticEmail" class="col-sm-2 col-form-label">구매
+							회원ID</label>
+						<div class="col-lg-5">
+							<input type="text" readonly
+								class="form-control-plaintext fw-bold" id="bUser" name="bUser"
+								value="<%=id%>">
+						</div>
 					</div>
-				</div>
-			</fieldset>
-		</form>
+					<div class="mb-2 row">
+						<label for="staticEmail" class="col-sm-2 col-form-label">구매
+							가격</label>
+						<div class="col-lg-5">
+							<input type="text" readonly
+								class="form-control-plaintext fw-bold" id="bPrice" name="bPrice"
+								value="<%=bPrice%>">
+						</div>
+					</div>
+					<div class="mb-2 row">
+						<label for="staticEmail" class="col-sm-2 col-form-label">연락처</label>
+						<div class="col-lg-5">
+							<input type="text" readonly
+								class="form-control-plaintext fw-bold" id="bTel" name="bTel"
+								value="<%=bTel%>">
+						</div>
+					</div>
+					<div class="mb-2 row">
+						<label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
+						<div class="col-lg-5">
+							<input type="text" readonly
+								class="form-control-plaintext fw-bold" id="bEmail" name="bEmail"
+								value="<%=bMail%>">
+						</div>
+					</div>
+					<div class="mb-2 row">
+						<label for="staticEmail" class="col-sm-2 col-form-label">희망
+							요구사항</label>
+						<div class="col-lg-12">
+							<textarea class="form-control" placeholder="구체적으로 요구사항을 입력해 주세요"
+								id="buyText" name="buyText" cols="20" wrap="hard" rows="7">직접 상담</textarea>
+						</div>
+					</div>
+					<div class="mb-2 row">
+						<div class="col-lg">
+							<input type="button" value="구매 신청하기" class="btn btn-primary"
+								onclick="buyFinish()"> <input type="button" value="뒤로가기"
+								class="btn btn-outline-primary" onclick="cancel()">
+
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
 	</div>
 	<script type="text/javascript">
 		src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"

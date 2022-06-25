@@ -42,7 +42,6 @@
 	else
 	{
 		//구매완료시 나오는 페이지
-
 		script.println("<script>");
 		script.println("alert('구매 신청 완료!')");
 		script.println("location.href = 'thankyou.jsp'");

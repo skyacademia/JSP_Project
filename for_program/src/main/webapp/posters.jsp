@@ -44,7 +44,7 @@
 				</form>
 				<div class="row">
 					<%
-					Connection conn = null;
+					/*Connection conn = null;
 
 					try {
 						String url = "jdbc:mysql://localhost:3306/jspsql";
@@ -57,7 +57,9 @@
 					} catch (SQLException ex) {
 						out.println("데이터베이스 연결이 실패했습니다.<br>");
 						out.println("SQLException: " + ex.getMessage());
-					}
+					}*/
+					%><%@ include file="dbconn.jsp"%><%
+					
 					String sql = "SELECT * FROM posttbl";
 					String pId = "";
 					String pTitle = "";
@@ -79,7 +81,7 @@
 					<div class="col-md-4 mt-5">
 						<div class="card" style="width: 100%;">
 							<img src="./resources/images/<%=pImageName%>"
-								class="card-img-top" alt="...">
+								class="card-img-top" alt="..." width="200px" height="250px">
 							<div class="card-body">
 								<h5 class="card-title"><%=pTitle%></h5>
 								<h6 class="card-subtitle mb-2 text-muted"><%=pWriter%></h6>

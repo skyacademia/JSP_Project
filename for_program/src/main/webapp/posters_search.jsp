@@ -44,19 +44,20 @@
 				</form>
 				<div class="row">
 					<%
-					Connection conn = null;
+					/*Connection conn = null;
 					try {
 						String url = "jdbc:mysql://localhost:3306/jspsql";
 						String user = "root";
-						String password = "root";
-						//String password = "1234";
+						//String password = "root";
+						String password = "1234";
 
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						conn = DriverManager.getConnection(url, user, password);
 					} catch (SQLException ex) {
 						out.println("데이터베이스 연결이 실패했습니다.<br>");
 						out.println("SQLException: " + ex.getMessage());
-					}
+					}*/
+					%><%@ include file="dbconn.jsp"%><%
 					request.setCharacterEncoding("UTF-8");
 					String search = request.getParameter("search_text");
 					search = "%"+search+"%";

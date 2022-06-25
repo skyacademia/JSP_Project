@@ -30,7 +30,7 @@
             script.println("alert('로그인 성공')");
             session.setAttribute("id", id); // 아이디 세션 저장
     		session.setAttribute("pw", pw); // 비밀번호 세션 저장
-            script.println("location.href = 'poster.jsp'"); // 로그인 되면 이동할페이지
+            script.println("location.href = 'index.jsp'"); // 로그인 되면 이동할페이지
             script.println("</script>");
         } else if (result == 0) { // 비밀번호 불일치시
             PrintWriter script = response.getWriter();

@@ -45,7 +45,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	<div class = "container">
+	<div class = "container mt-5">
 		<div class = "input-form-background row">
 			<div class = "input-form col-md-6 mx-auto my-auto">
 				<h4 class = "mb-3">회원가입</h4>

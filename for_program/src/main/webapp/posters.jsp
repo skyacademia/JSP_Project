@@ -30,7 +30,7 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<div class="container">
-		<div class="row">
+		<div class="row my-5">
 			<jsp:include page="category.jsp" />
 			<div class="col-md-9">
 				<form class='mt-2 mb-2 row' action="posters_search.jsp" method="post">
@@ -76,7 +76,7 @@
 						pImageName = rs.getString("pImageName");
 					%>
 
-					<div class="col-md-4">
+					<div class="col-md-4 mt-5">
 						<div class="card" style="width: 100%;">
 							<img src="./resources/images/<%=pImageName%>"
 								class="card-img-top" alt="...">
@@ -92,7 +92,7 @@
 					<%
 					}
 					%>
-					<div class="col-md-4">
+					<div class="col-md-4 mt-5">
 						<div class="card" style="width: 100%;">
 							<img src="./resources/images/test1.jpg" class="card-img-top"
 								alt="...">
@@ -104,7 +104,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4 mt-5">
 						<div class="card" style="width: 100%;">
 							<img src="./resources/images/test2.jpg" class="card-img-top"
 								alt="...">
@@ -116,7 +116,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4 mt-5">
 						<div class="card" style="width: 100%;">
 							<img src="./resources/images/test3.jpg" class="card-img-top"
 								alt="...">

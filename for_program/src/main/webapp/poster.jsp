@@ -54,7 +54,10 @@ request.setCharacterEncoding("UTF-8");
 
 	<!-- 헤더와 카테고리 추가-->
 	<jsp:include page="header.jsp" />
-	<jsp:include page="category.jsp" />
+	
+	<div class="container">
+		<div class="row">
+			<jsp:include page="category.jsp" />
 
 	<%
 	String id;

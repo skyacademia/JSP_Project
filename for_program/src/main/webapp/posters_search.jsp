@@ -30,7 +30,7 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<div class="container">
-		<div class="row my-5">
+		<div class="row">
 			<jsp:include page="category.jsp" />
 			<div class="col-md-9">
 				<form class='mt-2 mb-2 row' action="posters_search.jsp" method="post">
@@ -43,20 +43,8 @@
 					</div>
 				</form>
 				<div class="row">
+					<%@ include file="dbconn.jsp" %>
 					<%
-					Connection conn = null;
-					try {
-						String url = "jdbc:mysql://localhost:3306/jspsql";
-						String user = "root";
-						String password = "root";
-						//String password = "1234";
-
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						conn = DriverManager.getConnection(url, user, password);
-					} catch (SQLException ex) {
-						out.println("데이터베이스 연결이 실패했습니다.<br>");
-						out.println("SQLException: " + ex.getMessage());
-					}
 					request.setCharacterEncoding("UTF-8");
 					String search = request.getParameter("search_text");
 					search = "%"+search+"%";
@@ -81,7 +69,7 @@
 						pImageName = rs.getString("pImageName");
 					%>
 
-					<div class="col-md-4 mt-5">
+					<div class="col-md-4">
 						<div class="card" style="width: 100%;">
 							<img src="./resources/images/<%=pImageName%>"
 								class="card-img-top" alt="...">

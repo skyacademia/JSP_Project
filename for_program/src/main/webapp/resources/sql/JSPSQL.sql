@@ -46,7 +46,7 @@ CREATE TABLE `jspsql`.`membertbl` (
   `pText` TEXT NOT NULL,						-- 포스팅 글
   `pSkillText` TEXT NOT NULL,					-- 기술 소개
   `pCategory` VARCHAR(45) NOT NULL,				-- 포스터 카테고리
-  `pImageName` VARCHAR(45) NULL,				-- 업로드 이미지 명, 업로드한게 없다면 NULL -> 기본이미지를 띄우기
+  `pImageName` VARCHAR(45) NULL DEFAULT "basicThumnail.png",				-- 업로드 이미지 명, 업로드한게 없다면 NULL -> 기본이미지(basicThumnail.png)를 띄우기
   
   PRIMARY KEY (`pID`),
   FOREIGN KEY (pWriter) REFERENCES membertbl(mID) ON UPDATE CASCADE ON delete cascade
@@ -170,7 +170,7 @@ insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName)
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
-"프론트엔드",null);
+"프론트엔드",DEFAULT);
 
 insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("만족도 500퍼센터 여러분 기대하셔도 좋습니다.","kmj","100000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
@@ -190,7 +190,7 @@ insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName)
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
-"백엔드",null);
+"백엔드",DEFAULT);
 
 insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName) values ("클릭클릭!","imp","50000",
 "모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 모시깽이... 
@@ -206,4 +206,4 @@ insert into posttbl(pTitle,pWriter,pPrice,pText,pSkillText,pCategory,pImageName)
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...
 모시깽이2...모시깽이2...모시깽이2...모시깽이2...",
-"풀스택",null);
+"풀스택",DEFAULT);

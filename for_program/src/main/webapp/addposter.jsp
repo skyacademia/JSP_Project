@@ -24,7 +24,6 @@
 		if (confirm("게시물을 등록 하시겠습니까?")) {
 			
 			form.submit();
-			alert("등록이 완료되었습니다.");
 		}
 	}
 	function cancel() {
@@ -49,7 +48,7 @@
 
 
 	<form name="addForm" action = "<%= request.getContextPath()%>/addposter_process.jsp"
-			method = "POST" id="addForm">
+			method = "post" id="addForm" encType="multipart/form-data">
 		<div class="container mt-5">
 			<div class="row mx-5">
 				<h3 class="mb-5" style="text-align: center;">게시물 등록 화면</h3>

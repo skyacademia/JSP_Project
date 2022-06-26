@@ -45,9 +45,9 @@
                 <button class="btn btn-outline-primary me-3" onclick="location='Login.jsp'">로그인</button>
                 <button class="btn btn-outline-success" onclick="location='SignUP.jsp'" >회원가입</button>
                 <% }else { %>
-            	<button class="btn btn-outline-primary mx-1 px-5 fs-5" onclick="location='Login.jsp'">마이페이지</button>
+            	<button class="btn btn-outline-primary me-3" onclick="location='Login.jsp'">마이페이지</button>
             	<form action="Logout.jsp" method = "post">
-                	<button class="btn btn-outline-primary mx-1 px-5 fs-5" type = "submit" >로그아웃</button>
+                	<button class="btn btn-outline-primary" type = "submit" >로그아웃</button>
             	</form>                
             <% } %>
         </div>                         

@@ -139,7 +139,6 @@
 							<input type="button" value="구매 신청하기" class="btn btn-primary"
 								onclick="buyFinish()"> <input type="button" value="뒤로가기"
 								class="btn btn-outline-primary" onclick="cancel()">
-
 						</div>
 					</div>
 				</fieldset>

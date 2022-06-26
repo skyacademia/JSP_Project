@@ -63,11 +63,11 @@
       </div>
       <h1 class="display-4">여러분이 원하는 프로젝트를 찾아보세요</h1>
         <div class="mb-3">
-          <input type="text" class="form-control bg-danger " id="..." style="--bs-bg-opacity: .0;">
+        <form action="posters_search.jsp" method=get>
+			  <input type="text" class="form-control bg-danger" name="search_text" id="..." style="--bs-bg-opacity: .0;">        
+        </form>
         </div>
     </div>
-
-    <hr class="featurette-divider">
 
     <div class="container">
       <h1 class="display-4" style="margin-top:50px;

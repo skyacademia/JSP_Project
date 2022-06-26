@@ -33,33 +33,60 @@
 		<div class="row">
 			<jsp:include page="category.jsp" />
 			<div class="col-md-9">
-				<form class='mt-2 mb-2 row' action="posters_search.jsp" method="post">
+				<form class='mt-2 mb-2 row' action="posters_search.jsp"
+					method="post">
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="search" name="search_text"
-							aria-describedby="emailHelp">
+						<input type="text" class="form-control" id="search"
+							name="search_text" aria-describedby="emailHelp">
 					</div>
 					<div class="col-md-2">
 						<input type="submit" class="btn btn-primary" value="검색">
 					</div>
 				</form>
 				<div class="row">
-					<%@ include file="dbconn.jsp" %>
+					<%@ include file="dbconn.jsp"%>
 					<%
 					request.setCharacterEncoding("UTF-8");
-					String search = request.getParameter("search_text");
-					search = "%"+search+"%";
+					
+					String originalSearch = request.getParameter("search_text");
+					String changedSearch = "%" + originalSearch + "%";
 
-					String sql = "SELECT * FROM posttbl WHERE pTitle LIKE ? OR pCategory LIKE ?";
+					int pageNum = 0; // 현재 페이지
+					int totalCount = 0; // 조회된 데이터 개수
+					int contentInPage = 0; // 페이지당 표시되는 데이터 개수
+
+					String sql = "SELECT COUNT(*) as total FROM posttbl WHERE pTitle LIKE ? OR pCategory LIKE ?";
+					PreparedStatement prest = conn.prepareStatement(sql);
+					prest.setString(1, changedSearch);
+					prest.setString(2, changedSearch);
+					
+					ResultSet rs = prest.executeQuery();
+					while (rs.next()) {
+						totalCount = rs.getInt("total");
+					}
+
+					String pageString = request.getParameter("page");
+					if (pageString == null) {
+						pageNum = 1;
+					} else {
+						pageNum = Integer.parseInt(pageString);
+					}
+					PagingDAO paging = new PagingDAO(totalCount, pageNum);
+					contentInPage = paging.getCountList();
+					
+					sql = "SELECT * FROM posttbl WHERE pTitle LIKE ? OR pCategory LIKE ? ORDER BY pId DESC LIMIT ?, ?";
 					String pId = "";
 					String pTitle = "";
 					String pWriter = "";
 					String pPrice = "";
 					String pSkillText = "";
 					String pImageName = "";
-					PreparedStatement prest = conn.prepareStatement(sql);
-					prest.setString(1, search);
-					prest.setString(2, search);
-					ResultSet rs = prest.executeQuery();
+					prest = conn.prepareStatement(sql);
+					prest.setString(1, changedSearch);
+					prest.setString(2, changedSearch);
+					prest.setInt(3, (pageNum - 1) * contentInPage);
+					prest.setInt(4, contentInPage);
+					rs = prest.executeQuery();
 					while (rs.next()) {
 						pId = rs.getString("pId");
 						pTitle = rs.getString("pTitle");
@@ -77,14 +104,36 @@
 								<h5 class="card-title"><%=pTitle%></h5>
 								<h6 class="card-subtitle mb-2 text-muted"><%=pWriter%></h6>
 								<h6 class="card-subtitle mb-2 text-muted"><%=pSkillText%></h6>
-								<p class="card-text"><%=pPrice%>원</p>
-								<a href="#" class="btn btn-warning">자세히 보기</a>
+								<p class="card-text"><%=pPrice%>원
+								</p>
+								<a href="poster.jsp?id=<%=pId%>" class="btn btn-warning">자세히 보기</a>
 							</div>
 						</div>
 					</div>
 					<%
 					}
 					%>
+
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" href="#"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
+							<%
+							int startPage = paging.getPages()[0];
+							int endPage = paging.getPages()[1];
+							for (int singlePage = startPage; singlePage <= endPage; singlePage++) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="posters_search.jsp?search_text=<%=originalSearch%>&page=<%=singlePage%>"><%=singlePage%></a></li>
+							<%
+							}
+							%>
+							<li class="page-item"><a class="page-link" href="#"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a></li>
+						</ul>
+					</nav>
 
 				</div>
 			</div>

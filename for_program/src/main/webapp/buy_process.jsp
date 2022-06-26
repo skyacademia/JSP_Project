@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="com.fpp.dao.*"%>
+<%@ page import="java.time.*, java.time.format.DateTimeFormatter" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,7 @@
 	String bText = request.getParameter("buyText");
 	String pID = request.getParameter("pID");
 	String bUser = id;
+	
 	BuyDAO bDAO = new BuyDAO();
 	
 	int row = bDAO.buy(conn, bUser, Integer.parseInt(pID), bPrice, bTel, bEmail, bText);

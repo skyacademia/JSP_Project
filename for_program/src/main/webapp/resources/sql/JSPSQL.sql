@@ -4,12 +4,12 @@ CREATE SCHEMA `jspsql` ;
 -- 회원 테이블
 CREATE TABLE `jspsql`.`membertbl` (
   `mID` VARCHAR(45) NOT NULL,			-- 아이디, 기본키
-  `mPW` VARCHAR(45) NOT NULL,			-- 비밀번호
+  `mPW` Text NOT NULL,			-- 비밀번호
   `mName` VARCHAR(45) NOT NULL,			-- 회원명
   `mTel` VARCHAR(45) NOT NULL,			-- 연락처
   `mMail` VARCHAR(45) NULL,				-- 이메일
   `mAddress` VARCHAR(45) NULL,			-- 주소
-  `mText` Text(100) NULL,				-- 자기소개
+  `mText` Text NULL,				-- 자기소개
   `mCompany` VARCHAR(100),			-- 소속된 회사명
   `mThum` VARCHAR(100) NULL,			-- 업로드할 이미지 썸네일명
   
@@ -18,24 +18,6 @@ CREATE TABLE `jspsql`.`membertbl` (
 -- mSkill 사용 안하고
 -- 기술 테이블을 새로 작성하겠음...
   PRIMARY KEY (`mID`));
-  
-  
-  
-  
-  
---  기술 스택 테이블
-   CREATE TABLE `jspsql`.`skilltbl` (
-  `sMemberID` VARCHAR(45) NOT NULL,					-- 해당 기술을 가진 멤버, 외래키, 기본키
-  `sSkill1`	VARCHAR(20) NOT NULL,					-- 기술스택1 NOT NULL
-  `sSkill2`	VARCHAR(20) NULL,						-- 기술스택2 널 가능
-  `sSkill3`	VARCHAR(20) NULL,						-- 기술스택3 널 가능
-  
--- 여기서 기술스택 1, 2, 3 모두 같은 스택을 넣을 수 있는 문제가 있음... ex) Java, Java, Java 
--- 데이터를 불러올때 같은 값이면 불러오지 않게 if문 처리를 해 해결 하려고 하지만 더 좋은 방법 있으면 수정점....
- 
-  PRIMARY KEY (sMemberID),
-  FOREIGN KEY (sMemberID) REFERENCES membertbl(mID) ON UPDATE CASCADE ON delete cascade
-  );
   
   --  포스터 테이블
   CREATE TABLE `jspsql`.`posttbl` (
@@ -83,22 +65,12 @@ CREATE TABLE `jspsql`.`reviewtbl` (
  
   use `jspsql`;
  
- -- membertbl 초기화
-insert into membertbl values ("kys","1234","김예성","01011111111","temp1@naver.com","인천 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요! 이건 왜있는건가요? 잘 모르겟네요!  이건 왜있는건가요? 잘 모르겟네요!","KAKAO","defaultMember.png");
-insert into membertbl values ("kms","1234","김민섭","01022222222","temp2@naver.com","서울 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","KAKAO","defaultMember.png");
-insert into membertbl values ("bdh","1234","배동훈","01033333333","temp3@naver.com","경기 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","당근마켓","defaultMember.png");
-insert into membertbl values ("kmj","1234","김미준","01044444444","temp4@naver.com","충북 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","애플","defaultMember.png");
-insert into membertbl values ("imp","1234","이무표","01055555555","temp5@naver.com","부산 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","테슬라","defaultMember.png");
-
-
--- skilltbl 초기화
-insert into skilltbl values ("kys","Java",null,null);
-insert into skilltbl values ("kms","Cpp","Python",null);
-insert into skilltbl values ("bdh","Python","Python","Unity");	-- 파이썬 두개 이렇게 중복이 들어갈 수가 있다..
-insert into skilltbl values ("kmj","C","Python","JavaScript");
-insert into skilltbl values ("imp","Cpp","Python","JavaScript");
-
-
+ -- membertbl 초기화 비밀번호 1234
+insert into membertbl values ("kys","100500800900d00100600b00a00800000f00900500e00300d00400900700d00c00500400200900700100a00500500b00","김예성","01011111111","temp1@naver.com","인천 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요! 이건 왜있는건가요? 잘 모르겟네요!  이건 왜있는건가요? 잘 모르겟네요!","KAKAO","defaultMember.png");
+insert into membertbl values ("kms","100500800900d00100600b00a00800000f00900500e00300d00400900700d00c00500400200900700100a00500500b00","김민섭","01022222222","temp2@naver.com","서울 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","KAKAO","defaultMember.png");
+insert into membertbl values ("bdh","100500800900d00100600b00a00800000f00900500e00300d00400900700d00c00500400200900700100a00500500b00","배동훈","01033333333","temp3@naver.com","경기 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","당근마켓","defaultMember.png");
+insert into membertbl values ("kmj","100500800900d00100600b00a00800000f00900500e00300d00400900700d00c00500400200900700100a00500500b00","김미준","01044444444","temp4@naver.com","충북 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","애플","defaultMember.png");
+insert into membertbl values ("imp","100500800900d00100600b00a00800000f00900500e00300d00400900700d00c00500400200900700100a00500500b00","이무표","01055555555","temp5@naver.com","부산 부평구 머시깽이 거시기 어쩌구 저쩌구","이건 왜있는건가요? 잘 모르겟네요!","테슬라","defaultMember.png");
 
 -- reviewtbl 초기화
 insert into reviewtbl(rWriter, rPosterID, rScore, rText) values ("imp",1,5,"아 정말 좋은 회사입니다. 정말 인정인정~");

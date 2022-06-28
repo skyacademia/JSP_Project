@@ -37,20 +37,20 @@
 		if(rs == true){
 		
 		    MemberDAO memberDAO = new MemberDAO();
-		    int result = memberDAO.Register(id, pw, name, tel, email, address, about, company, thum);
+		    int result = memberDAO.Edit_Member(id, pw, name, tel, email, address, about, company, thum);
 		    if (result >= 1) {
 				//session.setAttribute("id", id); // 아이디 세션 저장
 				//session.setAttribute("pw", pw); // 비밀번호 세션 저장
 		        PrintWriter script = response.getWriter();
 		        script.println("<script>");
-		        script.println("alert('회원가입 성공')");
+		        script.println("alert('회원정보수정 성공')");
 		        script.println("location.href = " + pages); // 로그인 되면 이동할페이지
 		        script.println("</script>");
 		    } else { // 비밀번호 불일치시
 		        PrintWriter script = response.getWriter();
 		        script.println("<script>");
 		        script.println("alert('뭔가가 잘못되었습니다.')");
-		        script.println("history.back()"); //뒤로가기, 다시 로그인 페이지
+		        script.println("history.back()"); //뒤로가기
 		        script.println("</script>");
 		    }
 		}else{

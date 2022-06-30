@@ -48,8 +48,7 @@ public class PosterDAO {
 	
 //---------------------포스터ID에 해당하는 작성자정보 + 포스터 정보-------------------
 	public ResultSet get_poster_member(Connection conn,int pID) {
-		String sql = "SELECT * FROM posttbl as P " + "inner join membertbl as M " + "on P.pWriter = M.mID "
-				+ "inner join skilltbl as S on S.sMemberID = M.mID where pid=?;";
+		String sql = "SELECT * FROM posttbl as P " + "inner join membertbl as M " + "on P.pWriter = M.mID where pid=?;";
 		ResultSet rs = null;
 		try {
 			

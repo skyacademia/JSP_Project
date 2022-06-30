@@ -93,15 +93,6 @@ request.setCharacterEncoding("UTF-8");
 			}
 			String score_ = String.format("%.2f", score);
 
-			/*	//-------------------------(미완)해당 상품 구매자 찾기----------------------
-				BuyDAO bDAO = new BuyDAO();
-				ArrayList<String> buyers = new ArrayList<>();
-				rs = bDAO.get_info(conn, num);
-				if (rs != null) {		//-------구매했다면 null이 아닌 데이터가 들어있을것
-					while (rs.next()) {
-				buyers.add(rs.getString("bUser")); 		//구매자들을 ArrayList에 담는다..
-					}
-				}*/
 			//---------------------------------포스터정보 멤버정보-------------------------------------------------
 			rs = pDAO.get_poster_member(conn, num);
 			while (rs.next()) {
@@ -214,7 +205,7 @@ request.setCharacterEncoding("UTF-8");
 										<span class="fw-bold"> Email : <%=rs.getString("mMail")%></span>
 									</p>
 									<p>
-										<span class="fw-bold"> Stack : </span>
+										<span class="fw-bold"> Stack : <%//rs=rs.getString("mSkill") %></span>
 									</p>
 								</div>
 								<span class="mx-3"><%=rs.getString("mText")%></span>
@@ -234,13 +225,21 @@ request.setCharacterEncoding("UTF-8");
 
 								while (rs.next()) {
 								%>
+								
+								<div>
+								
 								<span class="text-warning"> <i class="fa-solid fa-star"></i></span>
+								
+								
 								<span class="fw-bold"><%=rs.getFloat("rScore")%></span> <span
 									class="fw-bold"><%=rs.getString("rWriter")%></span>
+								</div>
 								<p class="mt-2"><%=rs.getString("rText")%></p>
+								<div class="text-end"><%=rs.getString("rTime") %></div>
 								<hr>
 								<%
 								}
+								
 								%>
 								<!-- 로그인된 아이디, 별점, 리뷰텍스트 ,,, 기본설정은 hidden 누르면 보이게... 스크룰 맨아래로 -->
 								<form id="reviewForm" action="review_process.jsp" class="d-none">

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import = "java.io.PrintWriter" %>
 <%
 	String id;
 	try{	
@@ -8,6 +8,7 @@
 	}catch(Exception e){
 		id = null;
 	}
+    PrintWriter script = response.getWriter();
 
 %>
     <nav class="navbar navbar-expand-md fixed-top bg-white">
@@ -20,24 +21,16 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">프로젝트 입력</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="posters.jsp">프로젝트 검색</a>
             </li>
             <% if(id == null){ %>
                	<li class="nav-item">
-                    <a class="nav-link" href="posters.jsp">프로젝트 등록</a>
-                </li>
-                <li class="nav-item">
-                	<span class="nav-link">로그인을 해주세요!!!!@!@!@</span>
+               	
+                    <a class="nav-link" href="page_process.jsp">프로젝트 등록</a>
                 </li>
             	<% }else { %>
                 <li class="nav-item">
                     <a class="nav-link" href="addposter.jsp">프로젝트 등록</a>
-                </li>
-                <li class="nav-item">
-                	<span class="nav-link">로그인됨 : <%=id %></span>
                 </li>
                <% } %>
             </ul>

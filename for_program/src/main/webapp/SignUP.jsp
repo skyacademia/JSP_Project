@@ -11,37 +11,37 @@
   <link rel="stylesheet" href="./resources/css/carousel.css">
 <meta charset="UTF-8">
 <title>회원가입</title>
-	<style>
-	  body {
-	    min-height: 100vh;
-	    background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
-	    background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	    background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	    background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	    background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
-	  }
-	  .input-form {
-	    max-width: 680px;
+<style>
+	body {
+		min-height: 100vh;
+		background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
+		background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+		background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+		background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+		background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+	}
+	.input-form {
+		max-width: 680px;
+		
+		margin-top: 80px;
+		padding: 32px;
+		
+		background: #fff;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		-webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+		-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+		box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+	}
+	.icon {
+		font-size: 24px;
+	}
 	
-	    margin-top: 80px;
-	    padding: 32px;
-	
-	    background: #fff;
-	    -webkit-border-radius: 10px;
-	    -moz-border-radius: 10px;
-	    border-radius: 10px;
-	    -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-	    -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-	    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-	  }
-	      .icon {
-      font-size: 24px;
-    }
-
-    .cardImage {
-      background-size: cover;
-    }
-	</style>
+	.cardImage {
+		background-size: cover;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -49,7 +49,7 @@
 		<div class = "input-form-background row">
 			<div class = "input-form col-md-6 mx-auto my-auto">
 				<h4 class = "mb-3">회원가입</h4>
-				<form class = "validation-form" method="post" name = "fr" action="<%= request.getContextPath()%>/SignUPAction.jsp" novalidate>
+				<form class = "validation-form" method="post" name = "fr" action="<%= request.getContextPath()%>/SignUPAction.jsp" novalidate enctype="multipart/form-data">
 					<div class = "row">
 						<div class = "col-md-9 mb-3">
 							<label for="id">아이디</label>
@@ -93,6 +93,10 @@
 						<div class = "invalid-feedback">회사명을 입력해주세요.</div>
 					</div>
 					<div class = "mb-3">
+						<label for="company">보유 기술</label>
+						<input type="text" class = "form-control" id="Skill" name="Skill" maxlength="45" required>
+					</div>
+					<div class = "mb-3">
 						<label for="about">자기소개</label>
 						<Textarea class = "form-control" id="about" name="about" placeholder="자기소개를 해주세요." rows="10" required></Textarea>
 						<div class = "invalid-feedback">자기소개를 입력해주세요.</div>
@@ -100,17 +104,15 @@
 					<div class = "mb-3">
 						<label for="thum">프로필 사진</label>
 						<input type="file" class = "form-control" id="thum" name="thum" maxlength="20">
-						<!-- 사진업로드는 일단 나중...ㅠㅠ 넣으면 바로위 끝에 required 넣어야함!
-						<div class = "invalid-feedback">프로필 사진을 꼭 넣어주세요!.</div>
-						-->
 					</div>
 			        <hr class="mb-4">
 			        <div class="custom-control custom-checkbox">
 				        <input type="checkbox" class="custom-control-input" id="aggrement" required>
 				        <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
 			        </div>
-			        <div class="mb-4"></div>
-			        <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+			        <div class="mb-4 d-grid">
+			        	<button class="btn btn-primary btn-block" type="submit">가입 완료</button>
+			        </div>
 				</form>
 			</div>
 		</div>

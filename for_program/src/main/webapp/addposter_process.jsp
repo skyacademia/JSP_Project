@@ -20,9 +20,6 @@ request.setCharacterEncoding("UTF-8");
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-function msg(){
-	alert("등록이 완료되었습니다");
-}
 
 </script>
 </head>
@@ -45,9 +42,9 @@ function msg(){
 	String filename = null;
 
 	DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
-	//테스트 해볼때는.... 파일저장 경로 변경 각자 자기 절대경로로 바꾸기..... 포스터등록 다되고나서 자바 리프레쉬로 해줘야함 으휴...
-	//리프레쉬 안하는방법은 자바설정뭐 해줘야된다는데 안함 귀찬아
-	MultipartRequest multi = new MultipartRequest(request, "D:\\git_project\\fpp\\src\\main\\webapp\\resources\\images", 5 * 1024 * 1024, "utf-8", policy);
+
+	String realPath = request.getServletContext().getRealPath("resources/images");
+	MultipartRequest multi = new MultipartRequest(request, realPath, 5 * 1024 * 1024, "utf-8", policy);
 
 	Enumeration files = multi.getFileNames();
 	String str = (String) files.nextElement();
@@ -70,14 +67,20 @@ function msg(){
 
 
 	int row = pDAO.add_poster(conn, add_p_title, userID, add_p_price, add_p_text, add_p_skillText, add_p_category,
-			filename);
+			filename,null);
 	if (row != 0) {
-
+		
 	    script.println("<script>");
 	    script.println("alert('등록완료')");
+        script.println("location.href = 'posters.jsp'"); 
 	    script.println("</script>");
-	}   
-	response.sendRedirect("posters.jsp");
+	}  
+	else {
+		 script.println("<script>");
+		    script.println("alert('등록실패')");
+	        script.println("location.href = 'posters.jsp'"); 
+		    script.println("</script>");
+	}
 	%>
 
 </body>

@@ -37,7 +37,7 @@
 					method="post">
 					<div class="col-md-10">
 						<input type="text" class="form-control" id="search"
-							name="search_text" aria-describedby="emailHelp">
+							name="search_text" aria-describedby="emailHelp" placeholder="원하시는 검색어 및 카테고리를 입력해주세요">
 					</div>
 					<div class="col-md-2">
 						<input type="submit" class="btn btn-primary" value="검색">

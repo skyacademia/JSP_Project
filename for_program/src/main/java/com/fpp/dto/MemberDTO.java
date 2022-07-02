@@ -10,10 +10,11 @@ public class MemberDTO {
     private static String mText;
     private static String mCompany;
     private static String mThum;
+    private static String mSkill;
 
-    public void setMember(String mID, String mPW, String mName, String mTel, String mMail, String mAddress,
-            String mText,
-            String mCompany) {
+
+	public void setMember(String mID, String mPW, String mName, String mTel, String mMail, String mAddress,
+            String mText, String mCompany, String mThum, String mSkill) {
         this.mID = mID;
         this.mPW = mPW;
         this.mName = mName;
@@ -22,7 +23,17 @@ public class MemberDTO {
         this.mAddress = mAddress;
         this.mText = mText;
         this.mCompany = mCompany;
+        this.mThum = mThum;
+        this.mSkill = mSkill;
     }
+	
+    public String getmSkill() {
+		return mSkill;
+	}
+
+	public void setmSkill(String mSkill) {
+		this.mSkill = mSkill;
+	}
 
     public String getmID() {
         return mID;
@@ -84,21 +95,21 @@ public class MemberDTO {
 		return mCompany;
 	}
 
-	public static void setmCompany(String mCompany) {
-		MemberDTO.mCompany = mCompany;
+	public void setmCompany(String mCompany) {
+		this.mCompany = mCompany;
 	}
 
 	public static String getmThum() {
 		return mThum;
 	}
 
-	public static void setmThum(String mThum) {
-		MemberDTO.mThum = mThum;
+	public void setmThum(String mThum) {
+		this.mThum = mThum;
 	}
 
 	public String toString(String mID, String mPW, String mName, String mTel, String mMail, String mAddress,
             String mText, String mSkill, String mCompany, String mThum) {
 
-        return this.mID + this.mPW + this.mName + this.mTel + this.mMail + this.mAddress + this.mText +  this.mCompany + this.mThum;
+        return this.mID + this.mPW + this.mName + this.mTel + this.mMail + this.mAddress + this.mText +  this.mCompany + this.mThum + this.mSkill;
     }
 }

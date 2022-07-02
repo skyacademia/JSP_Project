@@ -3,6 +3,8 @@
 <%@ page import="com.fpp.dao.*"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%
 request.setCharacterEncoding("UTF-8");
 %>
@@ -60,6 +62,10 @@ request.setCharacterEncoding("UTF-8");
 			<jsp:include page="category.jsp" />
 
 			<%
+			//줄바꿈
+			pageContext.setAttribute("br","<br/>");
+			pageContext.setAttribute("cn","\n");
+
 			String id;
 			try {
 				id = (String) pageContext.getSession().getAttribute("id");
@@ -93,18 +99,13 @@ request.setCharacterEncoding("UTF-8");
 			}
 			String score_ = String.format("%.2f", score);
 
-			/*	//-------------------------(미완)해당 상품 구매자 찾기----------------------
-				BuyDAO bDAO = new BuyDAO();
-				ArrayList<String> buyers = new ArrayList<>();
-				rs = bDAO.get_info(conn, num);
-				if (rs != null) {		//-------구매했다면 null이 아닌 데이터가 들어있을것
-					while (rs.next()) {
-				buyers.add(rs.getString("bUser")); 		//구매자들을 ArrayList에 담는다..
-					}
-				}*/
 			//---------------------------------포스터정보 멤버정보-------------------------------------------------
+			String pText = "";
 			rs = pDAO.get_poster_member(conn, num);
 			while (rs.next()) {
+				pageContext.setAttribute("pText", rs.getString("pText"));
+				pageContext.setAttribute("mText", rs.getString("mText"));
+				pageContext.setAttribute("pSkillText", rs.getString("pSkillText"));
 			%>
 
 			<!-- poster-top -->
@@ -175,7 +176,7 @@ request.setCharacterEncoding("UTF-8");
 						<div class="col">
 							<h3 class="fw-bold" id="service">서비스 설명</h3>
 							<div class="serviceBox mx-3">
-								<p><%=rs.getString("pText")%></p>
+								<p>${fn:replace(pText,cn,br)};</p>
 							</div>
 							<hr>
 						</div>
@@ -184,7 +185,7 @@ request.setCharacterEncoding("UTF-8");
 						<div class="col">
 							<h3 class="fw-bold" id="skill">기술 소개</h3>
 							<div class="skillBox mx-3">
-								<%=rs.getString("pSkillText")%>
+								${fn:replace(pSkillText,cn,br)};
 							</div>
 
 							<hr>
@@ -214,10 +215,10 @@ request.setCharacterEncoding("UTF-8");
 										<span class="fw-bold"> Email : <%=rs.getString("mMail")%></span>
 									</p>
 									<p>
-										<span class="fw-bold"> Stack : </span>
+										<span class="fw-bold"> Stack : <span class="text-success"><%=rs.getString("mSkill") %></span></span>
 									</p>
 								</div>
-								<span class="mx-3"><%=rs.getString("mText")%></span>
+								<span class="mx-3">${fn:replace(mText,cn,br)};</span>
 								<%
 								}
 								%>
@@ -233,14 +234,24 @@ request.setCharacterEncoding("UTF-8");
 								rs = pDAO.get_review(conn, num);
 
 								while (rs.next()) {
+									
+									pageContext.setAttribute("rText", rs.getString("rText"));
 								%>
+								
+								<div>
+								
 								<span class="text-warning"> <i class="fa-solid fa-star"></i></span>
+								
+								
 								<span class="fw-bold"><%=rs.getFloat("rScore")%></span> <span
 									class="fw-bold"><%=rs.getString("rWriter")%></span>
-								<p class="mt-2"><%=rs.getString("rText")%></p>
+								</div>
+								<p class="mt-2">${fn:replace(rText,cn,br)};</p>
+								<div class="text-end"><%=rs.getString("rTime") %></div>
 								<hr>
 								<%
 								}
+								
 								%>
 								<!-- 로그인된 아이디, 별점, 리뷰텍스트 ,,, 기본설정은 hidden 누르면 보이게... 스크룰 맨아래로 -->
 								<form id="reviewForm" action="review_process.jsp" class="d-none">

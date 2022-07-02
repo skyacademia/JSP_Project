@@ -21,15 +21,22 @@
 	}
 	
 	String bPrice = request.getParameter("bPrice");
+	String bSellUser = request.getParameter("bSellUser");
 	String bTel = request.getParameter("bTel");
 	String bEmail = request.getParameter("bEmail");
 	String bText = request.getParameter("buyText");
 	String pID = request.getParameter("pID");
 	String bUser = id;
+	String bTime = null;
+	
+	//판매자 정보추가 7/1
+	String bSellTel = request.getParameter("bSellTel");  	//판매자 연락처
+	String bSellMail = request.getParameter("bSellMail");	//판매자 메일
+	String pTitle = request.getParameter("pTitle");			//판매 포스터 명
 	
 	BuyDAO bDAO = new BuyDAO();
 	
-	int row = bDAO.buy(conn, bUser, Integer.parseInt(pID), bPrice, bTel, bEmail, bText);
+	int row = bDAO.buy(conn, bUser,bSellUser, Integer.parseInt(pID), bPrice, bTel, bEmail, bText,bTime,bSellTel,bSellMail,pTitle);
 	
 
 	PrintWriter script = response.getWriter();

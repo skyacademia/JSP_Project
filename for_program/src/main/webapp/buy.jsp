@@ -66,22 +66,36 @@
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 
+	String bSellUser = "";
 	String bPrice = "";
 	String bMail = "";
 	String bTel = "";
+	String pTitle = "";
 	rs = pDAO.get_poster(conn, Integer.parseInt(pID));
 	while (rs.next()) {
-		bPrice = rs.getString("pPrice");
+		bPrice = rs.getString("pPrice");			//판매가격 (구매가격)
+		bSellUser = rs.getString("pWriter");		//판매자ID
+		pTitle  = rs.getString("pTitle");			//판매 게시글명
 	}
-	conn.close();
 
-	MemberDAO mDAO = new MemberDAO();
-	rs = mDAO.get_info(id);
-	while (rs.next()) {
-		bTel = rs.getString("mTel");
-		bMail = rs.getString("mMail");
+	MemberDAO mDAO = new MemberDAO();	//판매자정보
+	
+	String bSellTel = "";
+	String bSellMail = "";
+	rs = mDAO.get_info(bSellUser);		
+	while (rs.next()){
+		bSellTel = rs.getString("mTel");			//판매자 연락처
+		bSellMail = rs.getString("mMail");		//판매자 이메일
 	}
-	%>
+	
+	
+	rs = mDAO.get_info(id);				//구매자정보
+	while (rs.next()) {
+		bTel = rs.getString("mTel");				//구매자 연락처
+		bMail = rs.getString("mMail");				//구매자 이메일
+	}												//구매자 id는 현재 로그인된 id 사용
+													
+	%>												
 	<!-- buy -->
 	<div class="container">
 		<div class="row">
@@ -89,9 +103,11 @@
 				action="<%=request.getContextPath()%>/buy_process.jsp" method="POST"
 				id="buyForm">
 				<fieldset>
-					<legend class="mt-5 text-center">구매 회원 정보</legend>
-					<textarea class="d-none" id="pID" name="pID"><%=pID%></textarea>
-
+					<legend class="mt-5 text-center">구매 정보</legend>
+					<textarea class="d-none" id="pID" name="pID"><%=pID%></textarea>		
+					<textarea class="d-none" id="pTitle" name="pTitle"><%=pTitle%></textarea>
+					<textarea class="d-none" id="bSellTel" name="bSellTel"><%=bSellTel%></textarea>
+					<textarea class="d-none" id="bSellMail" name="bSellMail"><%=bSellMail%></textarea>		
 					<div class="mb-2 row">
 						<label for="staticEmail" class="col-sm-2 col-form-label">구매
 							회원ID</label>
@@ -127,7 +143,15 @@
 						</div>
 					</div>
 					<div class="mb-2 row">
-						<label for="staticEmail" class="col-sm-2 col-form-label">희망
+						<label for="staticEmail" class="col-sm-2 col-form-label text-primary">판매 회원ID</label>
+						<div class="col-lg-5">
+							<input type="text" readonly
+								class="form-control-plaintext fw-bold" id="bSellUser" name="bSellUser"
+								value="<%=bSellUser%>">
+						</div>
+					</div>
+					<div class="mb-2 row">
+					<label for="staticEmail" class="col-sm-2 col-form-label">희망
 							요구사항</label>
 						<div class="col-lg-12">
 							<textarea class="form-control" placeholder="구체적으로 요구사항을 입력해 주세요"

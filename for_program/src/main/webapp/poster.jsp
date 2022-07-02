@@ -109,9 +109,9 @@ request.setCharacterEncoding("UTF-8");
 			%>
 
 			<!-- poster-top -->
-			<div class="col-md-9 mt-5">
+			<div class="col-md-9 mt-3">
 
-				<nav style="-bs-breadcrumb-divider: '&gt;';" aria-label="breadcrumb">
+				<nav style="-bs-breadcrumb-divider: '&gt;';" aria-label="breadcrumb" class="mt-2">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="posters.jsp">전체리스트</a></li>
 						<li class="breadcrumb-item active" aria-current="page"><%=rs.getString("pCategory")%></li>
@@ -246,7 +246,7 @@ request.setCharacterEncoding("UTF-8");
 								<span class="fw-bold"><%=rs.getFloat("rScore")%></span> <span
 									class="fw-bold"><%=rs.getString("rWriter")%></span>
 								</div>
-								<p class="mt-2">${fn:replace(rText,cn,br)};</p>
+								<p class="mt-2">${fn:replace(rText,cn,br)}</p>
 								<div class="text-end"><%=rs.getString("rTime") %></div>
 								<hr>
 								<%

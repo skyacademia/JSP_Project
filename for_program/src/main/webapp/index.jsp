@@ -23,6 +23,13 @@
 .cardImage {
 	background-size: cover;
 }
+
+.cardText {
+	padding-top: 5rem;
+}
+.cardHref{
+	text-decoration: none;
+}
 </style>
 <!-- Custom styles for this template -->
 <!-- <link href="./css/carousel.css" rel="stylesheet"> -->
@@ -60,58 +67,106 @@
     </nav>
 -->
 	<!--이미지-->
-	<div class="card bg-dark text-white">
-		<img src="./resources/images/mainImg.jpg" class="card-img"
+	<div class="card bg-dark text-white" style="height: 50rem;">
+		<img src="./resources/images/mainImg.jpg" class="card-img h-100"
 			alt="메인페이지 이미지">
-		<div class="card-img-overlay">
-			<h5 class="display-5 fw-bold" style="margin-top: 25rem;">여러분이
+		<div class="container card-img-overlay">
+			<h5 class="display-5 fw-bold" style="margin-top: 20rem;">여러분이
 				원하는 프로젝트를 찾아보세요</h5>
 			<div class="card-text mt-4">
 				<form action="posters_search.jsp" method=get>
-					<input type="text" class="form-control" style="-bs-bg-opacity: .0;"
+					<input type="text" class="form-control"
+						style="-bs-bg-opacity: .0; background-color: transparent;"
 						name="search_text" id="...">
 				</form>
 			</div>
 		</div>
 	</div>
 	<div class="container">
-		<h1 class="display-4" style="margin-top: 50px; margin-bottom: 50px;">여러분이
-			원하는 프로젝트를 찾아보세요</h1>
+		<h1 class="display-4" style="margin-top: 50px; margin-bottom: 50px;">프로그램에 대한 모든 것</h1>
 		<div id="carouselExampleControls" class="carousel slide"
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
 					<div class="container">
-						<div class="row" style="height: 20rem;">
-							<div class="card col-md-4 cardImage "
-								style="background-image: url(./resources/images/test1.jpg);">
-								<div class="card-body">프론트엔드</div>
+						<div class="row text-white" style="height: 25rem;">
+							<div class="col">
+								<a href="./SetCategory/Front.jsp" class="cardHref">
+									<div
+										class="card card-cover h-100 overflow-hidden text-white bg-white rounded-5 cardImage"
+										style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./resources/images/frontend.png);">
+										<div
+											class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+											<h2 class="mt-5 mb-4 display-6 lh-1 fw-bold cardText text-center">프론트엔드</h2>
+										</div>
+									</div>
+								</a>
 							</div>
-							<div class="card col-md-4 rounded-4 cardImage"
-								style="background-image: url(./resources/images/test2.jpg);">
-								<div class="card-body">백엔드</div>
+							<div class="col">
+								<a href="./SetCategory/Back.jsp" class="cardHref">
+									<div
+										class="card card-cover h-100 overflow-hidden text-white bg-white rounded-5 cardImage"
+										style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./resources/images/backend.png);">
+										<div
+											class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+											<h2 class="mt-5 mb-4 display-6 lh-1 fw-bold cardText text-center">백엔드</h2>
+										</div>
+									</div>
+								</a>
 							</div>
-							<div class="card col-md-4 cardImage"
-								style="background-image: url(./resources/images/test3.jpg);">
-								<div class="card-body">풀스택</div>
+							<div class="col">
+								<a href="./SetCategory/WebFull.jsp" class="cardHref">
+									<div
+										class="card card-cover h-100 overflow-hidden text-white bg-white rounded-5 cardImage"
+										style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./resources/images/fullstack.png);">
+										<div
+											class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+											<h2 class="mt-5 mb-4 display-6 lh-1 fw-bold cardText text-center">풀스택</h2>
+										</div>
+									</div>
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="carousel-item">
 					<div class="container">
-						<div class="row" style="height: 20rem;">
-							<div class="card col-md-4 cardImage"
-								style="background-image: url(./resources/images/test1.jpg);">
-								<div class="card-body">안드로이드</div>
+						<div class="row text-white" style="height: 25rem;">
+							<div class="col">
+								<a href="./SetCategory/Android.jsp" class="cardHref">
+									<div
+										class="card card-cover h-100 overflow-hidden text-white bg-white rounded-5 cardImage"
+										style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./resources/images/android.png);">
+										<div
+											class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+											<h2 class="mt-5 mb-4 display-6 lh-1 fw-bold cardText text-center">안드로이드</h2>
+										</div>
+									</div>
+								</a>
 							</div>
-							<div class="card col-md-4 cardImage"
-								style="background-image: url(./resources/images/test2.jpg);">
-								<div class="card-body">IOS</div>
+							<div class="col">
+								<a href="./SetCategory/IOS.jsp" class="cardHref">
+									<div
+										class="card card-cover h-100 overflow-hidden text-white bg-white rounded-5 cardImage"
+										style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./resources/images/swift.png);">
+										<div
+											class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+											<h2 class="mt-5 mb-4 display-6 lh-1 fw-bold cardText text-center">iOS</h2>
+										</div>
+									</div>
+								</a>
 							</div>
-							<div class="card col-md-4 cardImage"
-								style="background-image: url(./resources/images/test3.jpg);">
-								<div class="card-body">크로스플랫폼</div>
+							<div class="col">
+								<a href="./SetCategory/Hybrid.jsp" class="cardHref">
+									<div
+										class="card card-cover h-100 overflow-hidden text-white bg-white rounded-5 cardImage"
+										style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./resources/images/flutter.svg);">
+										<div
+											class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+											<h2 class="mt-5 mb-4 display-6 lh-1 fw-bold cardText text-center">크로스플랫폼</h2>
+										</div>
+									</div>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -135,13 +190,11 @@
 	<div class="container">
 		<div class="row featurette">
 			<div class="col-md-7">
-				<h2 class="featurette-heading fw-normal lh-1">프로그래머를 위한 플랫폼</h2>
-				<p class="text-start align-middle">Some great placeholder
-					content for the first featurette here. Imagine some exciting prose
-					here.</p>
+				<h2 class="featurette-heading fs-1 pt-5">프로그램만을 위한 프리랜서 플랫폼</h2>
+				<p class="lead">프로그램을 위해 프로그램 개발이 필요한 사람, 프로그램 개발을 하는 사람을<br> 연결해주는 플랫폼</p>
 			</div>
 			<div class="col-md-5">
-				<img class="img-fluid" src="./resources/images/test1.jpg"
+				<img class="img-fluid" src="./resources/images/programmer.svg"
 					style="height: 500px; width: 500px;">
 			</div>
 		</div>
@@ -152,13 +205,12 @@
 	<div class="container">
 		<div class="row featurette">
 			<div class="col-md-7 order-md-2">
-				<h2 class="featurette-heading fw-normal lh-1 display-5">프로그래머를
-					위한 플랫폼</h2>
-				<p class="lead">Some great placeholder content for the first
-					featurette here. Imagine some exciting prose here.</p>
+				<h2 class="featurette-heading fs-1 pt-5">실력있는 개발자가 인정받는 플랫폼</h2>
+				<p class="lead">실력있는 개발자인지 궁금하신가요?<br>실구매자들이 남긴 리뷰를 확인해보세요.</p>
+
 			</div>
 			<div class="col-md-5 order-md-1">
-				<img class="img-fluid" src="./resources/images/test1.jpg"
+				<img class="img-fluid" src="./resources/images/review.svg"
 					style="height: 500px; width: 500px;">
 			</div>
 		</div>

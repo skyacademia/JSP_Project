@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-			<div class="col-md-3">
-				<h4 class="col-md-4 mt-5">카테고리</h4>
+			<div class="col-md-3 mt-3">
+				<h4 class="col-md-4 mt-2">카테고리</h4>
                 <hr>
 				<div class="list-group list-group-flush mb-4">
 					<a href="./SetCategory/Front.jsp" class="list-group-item list-group-item-action text-start font-weight-bold">프론트엔드</a>

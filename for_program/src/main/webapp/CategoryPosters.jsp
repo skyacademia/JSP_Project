@@ -55,9 +55,11 @@
 					int totalCount = 0;
 					int contentInPage = 0;
 
-					String sql = "SELECT COUNT(*) as total FROM posttbl" ;
-					Statement st = conn.createStatement();
-					ResultSet rs = st.executeQuery(sql);
+					String sql = "SELECT COUNT(*) as total FROM posttbl WHERE pCategory LIKE ?" ;
+					
+					PreparedStatement pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1,category);
+					ResultSet rs = pstmt.executeQuery();
 					while (rs.next()) {
 						totalCount = rs.getInt("total");
 					}
@@ -71,11 +73,12 @@
 					PagingDAO paging = new PagingDAO(totalCount, pageNum);
 					contentInPage = paging.getCountList();
 
-					sql = "select * from posttbl where pID >= ? and pID <= ? and pCategory LIKE '"+ category+"' order by pId DESC";
+					sql = "SELECT * FROM posttbl WHERE pCategory LIKE ? ORDER BY pId DESC LIMIT ?, ?";
 					try {
-						PreparedStatement pstmt = conn.prepareStatement(sql);
-						pstmt.setInt(1, (totalCount-((pageNum - 1)*12)) - (contentInPage-1));
-						pstmt.setInt(2, totalCount-((pageNum - 1)*12));
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, category);
+						pstmt.setInt(2, (pageNum - 1) * contentInPage);
+						pstmt.setInt(3, contentInPage);
 						rs = pstmt.executeQuery();
 					} catch (SQLException e) {
 						e.printStackTrace();
